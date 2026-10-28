@@ -1,0 +1,443 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Tech Suli | Technik-News und Leaks</title>
+<meta name="description" content="Suleyman (@tech.suli): Technik-News und Leaks, jeden Tag neu. Alle Kanäle, Produkte aus den Videos und der Kontakt für Kooperationen.">
+<meta name="theme-color" content="#18191C">
+<meta property="og:title" content="Tech Suli">
+<meta property="og:description" content="Technik-News und Leaks, jeden Tag neu.">
+<link rel="canonical" href="https://suli027.github.io/">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://suli027.github.io/">
+<meta property="og:image" content="https://suli027.github.io/assets/hero.jpg">
+<meta property="og:image:width" content="1000">
+<meta property="og:image:height" content="1000">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="assets/favicon.png">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<link rel="preload" href="assets/hero.webp" as="image">
+<link rel="preload" href="assets/fonts/clash-grotesk-600.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="assets/fonts.css">
+<style>
+  :root {
+    --page: #F1F1F3;
+    --band: #18191C;
+    --card: #FFFFFF;
+    --ink: #141416;
+    --ink-2: #5F616A;
+    --line: #141416;
+    --tile: #18191C;
+    --ok: #12703F;
+    --blue: #2F6FEB;
+    --focus: #2F6FEB;
+
+    --font: "Clash Grotesk", "Onest", system-ui, sans-serif;
+    --ease-out: cubic-bezier(.16, 1, .3, 1);
+    --lift: 0 10px 22px -10px rgba(20, 20, 22, .45);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0;
+    background: var(--page);
+    color: var(--ink);
+    font-family: var(--font);
+    font-size: 1rem;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    min-height: 100dvh;
+  }
+  ::selection { background: var(--ink); color: #fff; }
+  a { color: inherit; }
+  img { display: block; max-width: 100%; }
+  .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+  :focus-visible { outline: 3px solid var(--focus); outline-offset: 3px; }
+
+  /* Großes Porträt oben, schräg abgeschnitten */
+  .hero {
+    position: relative;
+    height: clamp(380px, 112vw, 560px);
+    background: var(--band);
+    clip-path: polygon(0 0, 100% 0, 100% 84%, 0 100%);
+    overflow: hidden;
+  }
+  .hero img { width: 100%; height: 100%; object-fit: cover; object-position: 55% 22%; }
+  .hero::after {
+    content: "";
+    position: absolute; inset: 0;
+    background:
+      linear-gradient(to bottom, rgba(24, 25, 28, .35), rgba(24, 25, 28, 0) 24%),
+      linear-gradient(to bottom, rgba(24, 25, 28, 0) 46%, rgba(24, 25, 28, .75) 78%, var(--band) 100%);
+  }
+  .share {
+    position: absolute; top: max(16px, env(safe-area-inset-top)); right: 16px; z-index: 3;
+    width: 48px; height: 48px; border: 0;
+    display: grid; place-items: center;
+    background: #fff; color: var(--ink);
+    box-shadow: var(--lift);
+    cursor: pointer;
+    transition: transform .2s var(--ease-out);
+  }
+  .share:active { transform: scale(.94); }
+  .lang {
+    position: absolute; top: max(16px, env(safe-area-inset-top)); left: 16px; z-index: 3;
+    display: flex; box-shadow: var(--lift);
+  }
+  .lang button {
+    width: 48px; height: 48px; border: 0;
+    background: #fff; color: var(--ink);
+    font: inherit; font-size: .9375rem; font-weight: 600; letter-spacing: .04em;
+    cursor: pointer;
+    transition: background-color .2s var(--ease-out), color .2s var(--ease-out);
+  }
+  .lang button[aria-pressed="true"] { background: var(--ink); color: #fff; }
+  .lang button:not([aria-pressed="true"]):hover { background: #E9E9EC; }
+  .share svg { width: 22px; height: 22px; }
+
+  .wrap { position: relative; z-index: 2; max-width: 1080px; margin: -120px auto 0; padding: 0 16px 40px; }
+
+  /* Profilkarte */
+  .profile {
+    background: var(--card);
+    padding: 28px 20px 24px;
+    text-align: center;
+    box-shadow: 0 20px 40px -24px rgba(20, 20, 22, .35);
+  }
+  h1 { margin: 0; font-size: clamp(2.125rem, 10vw, 3rem); font-weight: 700; letter-spacing: .01em; line-height: 1.05; }
+  .handle { display: inline-flex; align-items: center; gap: 6px; margin: 8px 0 0; font-size: 1.0625rem; font-weight: 600; letter-spacing: .04em; }
+  .handle svg { width: 20px; height: 20px; color: var(--blue); flex: none; }
+  .bio { margin: 10px auto 0; color: var(--ink-2); font-size: clamp(.9375rem, 4.2vw, 1.0625rem); font-weight: 600; letter-spacing: .06em; text-transform: uppercase; }
+  .place { display: inline-flex; align-items: center; gap: 6px; margin: 10px 0 0; color: var(--ink-2); font-weight: 500; }
+  .place svg { width: 18px; height: 18px; }
+
+  .contact { list-style: none; margin: 20px auto 0; padding: 0; display: grid; gap: 10px; max-width: 640px; }
+  .cbtn {
+    display: flex; align-items: center; justify-content: center; gap: 10px;
+    min-height: 52px; padding: 8px 16px;
+    border: 1.5px solid var(--line);
+    background: var(--card); color: var(--ink);
+    font-weight: 600; letter-spacing: .01em; font-size: clamp(.9375rem, 4vw, 1.0625rem);
+    text-decoration: none;
+    transition: background-color .2s var(--ease-out), color .2s var(--ease-out);
+  }
+  .cbtn:hover { background: var(--ink); color: #fff; }
+  .cbtn svg { width: 20px; height: 20px; flex: none; }
+  .cbtn span { overflow-wrap: normal; }
+  .cbtn .wa { color: #1FAF54; }
+  .cbtn:hover .wa { color: #fff; }
+
+  /* Link-Karten wie bei techjustin: weiße Karte, schwarze Kachel steht links etwas heraus */
+  .group { list-style: none; margin: 0; padding: 0; display: grid; gap: 20px; }
+  .group > li { min-width: 0; }
+  .socials { margin-top: 32px; }
+  .item {
+    position: relative;
+    display: grid; grid-template-columns: minmax(0, 1fr) 22px; align-items: center; gap: 12px;
+    min-height: 80px; height: 100%;
+    margin-left: 10px;
+    padding: 12px 22px 12px 70px;
+    background: var(--card);
+    text-decoration: none;
+    box-shadow: 0 16px 32px -14px rgba(20, 20, 22, .14);
+    transition: transform .25s var(--ease-out), box-shadow .25s var(--ease-out);
+  }
+  .item:hover { transform: translateY(-2px); box-shadow: 0 20px 36px -14px rgba(20, 20, 22, .22); }
+  .item:active { transform: scale(.99); }
+  .item > span:not(.tile) { min-width: 0; }
+  .tile {
+    position: absolute; left: -10px; top: 50%;
+    width: 60px; height: 60px; transform: translateY(-50%);
+    display: grid; place-items: center;
+    background: var(--tile); color: #fff;
+    box-shadow: 0 10px 16px -6px rgba(20, 20, 22, .45);
+  }
+  .tile svg { width: 28px; height: 28px; }
+  .yt { background: #E62117; }
+  .tt { background: #000; }
+  .ig { background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%); }
+  .t { display: block; font-size: clamp(1rem, 4.4vw, 1.125rem); font-weight: 600; letter-spacing: 0; line-height: 1.25; }
+  .s { display: block; margin-top: 3px; font-size: .9375rem; font-weight: 500; color: #6E6E74; line-height: 1.3; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .arrow { width: 20px; height: 20px; color: #8A8A90; transition: transform .25s var(--ease-out), color .25s var(--ease-out); }
+  .item:hover .arrow { transform: translateX(3px); color: var(--ink); }
+
+  /* Kanäle etwas größer als die Produkte */
+  .socials .item { min-height: 96px; padding-left: 84px; }
+  .socials .tile { width: 72px; height: 72px; }
+  .socials .tile svg { width: 34px; height: 34px; }
+  .socials .t { font-size: 1.375rem; }
+
+  .rule { height: 2px; background: var(--line); border: 0; margin: 40px 0 28px; }
+
+  .head { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 8px 10px; text-align: center; }
+  .head h2 { margin: 0; font-size: 1.5rem; font-weight: 700; letter-spacing: .005em; line-height: 1.2; }
+  .ad { padding: 3px 8px; background: var(--ink); color: #fff; font-size: .75rem; font-weight: 700; }
+  .note { margin: 8px auto 22px; max-width: 48ch; text-align: center; color: var(--ink-2); font-size: .9375rem; }
+
+  .trust { display: flex; align-items: center; justify-content: center; gap: 8px; margin: 36px 0 0; color: var(--ink-2); font-size: .9375rem; text-align: center; }
+  .trust svg { width: 18px; height: 18px; color: var(--ok); flex: none; }
+  footer { display: flex; justify-content: center; flex-wrap: wrap; gap: 6px 22px; margin-top: 14px; font-size: .875rem; color: var(--ink-2); padding-bottom: env(safe-area-inset-bottom); }
+  footer a { text-decoration: none; }
+  footer a:hover { color: var(--ink); text-decoration: underline; text-underline-offset: 3px; }
+
+  /* Ein Moment beim Laden: das Foto zieht sanft heran */
+  @media (prefers-reduced-motion: no-preference) {
+    .hero img { animation: settle 1.4s var(--ease-out) both; }
+    @keyframes settle { from { transform: scale(1.08); filter: blur(6px); opacity: .4; } }
+  }
+
+  @media (min-width: 700px) {
+    .hero { height: 560px; clip-path: polygon(0 0, 100% 0, 100% 70%, 0 100%); }
+    .hero img {
+      width: min(100%, 820px); margin: 0 auto;
+      object-position: 55% 24%;
+      -webkit-mask-image: linear-gradient(to right, transparent, #000 22%, #000 78%, transparent);
+      mask-image: linear-gradient(to right, transparent, #000 22%, #000 78%, transparent);
+    }
+    .wrap { margin-top: -170px; padding: 0 32px 56px; }
+    .profile { padding: 36px 40px 32px; }
+    .contact { grid-template-columns: 1fr 1fr; }
+    .group { grid-template-columns: 1fr 1fr; column-gap: 18px; row-gap: 20px; }
+    .socials li:first-child { grid-column: 1 / -1; }
+  }
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-tiktok" viewBox="0 0 24 24"><path fill="currentColor" d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></symbol>
+  <symbol id="i-instagram" viewBox="0 0 24 24"><path fill="currentColor" d="M7.0301.084c-1.2768.0602-2.1487.264-2.911.5634-.7888.3075-1.4575.72-2.1228 1.3877-.6652.6677-1.075 1.3368-1.3802 2.127-.2954.7638-.4956 1.6365-.552 2.914-.0564 1.2775-.0689 1.6882-.0626 4.947.0062 3.2586.0206 3.6671.0825 4.9473.061 1.2765.264 2.1482.5635 2.9107.308.7889.72 1.4573 1.388 2.1228.6679.6655 1.3365 1.0743 2.1285 1.38.7632.295 1.6361.4961 2.9134.552 1.2773.056 1.6884.069 4.9462.0627 3.2578-.0062 3.668-.0207 4.9478-.0814 1.28-.0607 2.147-.2652 2.9098-.5633.7889-.3086 1.4578-.72 2.1228-1.3881.665-.6682 1.0745-1.3378 1.3795-2.1284.2957-.7632.4966-1.636.552-2.9124.056-1.2809.0692-1.6898.063-4.948-.0063-3.2583-.021-3.6668-.0817-4.9465-.0607-1.2797-.264-2.1487-.5633-2.9117-.3084-.7889-.72-1.4568-1.3876-2.1228C21.2982 1.33 20.628.9208 19.8378.6165 19.074.321 18.2017.1197 16.9244.0645 15.6471.0093 15.236-.005 11.977.0014 8.718.0076 8.31.0215 7.0301.0839m.1402 21.6932c-1.17-.0509-1.8053-.2453-2.2287-.408-.5606-.216-.96-.4771-1.3819-.895-.422-.4178-.6811-.8186-.9-1.378-.1644-.4234-.3624-1.058-.4171-2.228-.0595-1.2645-.072-1.6442-.079-4.848-.007-3.2037.0053-3.583.0607-4.848.05-1.169.2456-1.805.408-2.2282.216-.5613.4762-.96.895-1.3816.4188-.4217.8184-.6814 1.3783-.9003.423-.1651 1.0575-.3614 2.227-.4171 1.2655-.06 1.6447-.072 4.848-.079 3.2033-.007 3.5835.005 4.8495.0608 1.169.0508 1.8053.2445 2.228.408.5608.216.96.4754 1.3816.895.4217.4194.6816.8176.9005 1.3787.1653.4217.3617 1.056.4169 2.2263.0602 1.2655.0739 1.645.0796 4.848.0058 3.203-.0055 3.5834-.061 4.848-.051 1.17-.245 1.8055-.408 2.2294-.216.5604-.4763.96-.8954 1.3814-.419.4215-.8181.6811-1.3783.9-.4224.1649-1.0577.3617-2.2262.4174-1.2656.0595-1.6448.072-4.8493.079-3.2045.007-3.5825-.006-4.848-.0608M16.953 5.5864A1.44 1.44 0 1 0 18.39 4.144a1.44 1.44 0 0 0-1.437 1.4424M5.8385 12.012c.0067 3.4032 2.7706 6.1557 6.173 6.1493 3.4026-.0065 6.157-2.7701 6.1506-6.1733-.0065-3.4032-2.771-6.1565-6.174-6.1498-3.403.0067-6.156 2.771-6.1496 6.1738M8 12.0077a4 4 0 1 1 4.008 3.9921A3.9996 3.9996 0 0 1 8 12.0077"/></symbol>
+  <symbol id="i-youtube" viewBox="0 0 24 24"><path fill="currentColor" d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></symbol>
+  <symbol id="i-arrow" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M7 7h10v10M7 17 17 7"/></symbol>
+  <symbol id="i-mail" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></g></symbol>
+  <symbol id="i-copy" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="8" y="8" rx="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></g></symbol>
+  <symbol id="i-badge" viewBox="0 0 24 24"><path fill="currentColor" d="M3.85 8.62a4 4 0 0 1 4.78-4.77 4 4 0 0 1 6.74 0 4 4 0 0 1 4.78 4.78 4 4 0 0 1 0 6.74 4 4 0 0 1-4.77 4.78 4 4 0 0 1-6.75 0 4 4 0 0 1-4.78-4.77 4 4 0 0 1 0-6.76Z"/><path fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="m9 12 2 2 4-4"/></symbol>
+  <symbol id="i-shield" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></g></symbol>
+  <symbol id="i-share" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><path d="M16 6l-4-4-4 4"/><path d="M12 2v13"/></g></symbol>
+  <symbol id="i-pin" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/></g></symbol>
+  <symbol id="i-phone" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></symbol>
+  <symbol id="i-mic" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><path d="M12 19v3"/></g></symbol>
+  <symbol id="i-snow" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12h20M12 2v20m8-6-4-4 4-4M4 8l4 4-4 4m12-12-4 4-4-4m0 16 4-4 4 4"/></g></symbol>
+  <symbol id="i-battery" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h1a2 2 0 0 1 2 2v6a2 2 0 0 1-2 2h-2"/><path d="M6 7H4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h1"/><path d="m11 7-3 5h4l-3 5"/><path d="M22 11v2"/></g></symbol>
+  <symbol id="i-bag" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></g></symbol>
+  <symbol id="i-link" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></g></symbol>
+  <symbol id="i-whatsapp" viewBox="0 0 24 24"><path fill="currentColor" d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.030 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></symbol>
+  <symbol id="i-right" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M5 12h14m-7-7 7 7-7 7"/></symbol>
+</svg>
+
+<div class="hero">
+  <img src="assets/hero.webp" width="1000" height="1000" alt="Suleyman, bekannt als Tech Suli" data-i18n-alt="alt" fetchpriority="high">
+</div>
+<div class="lang" role="group" aria-label="Sprache / Language">
+  <button type="button" data-lang="de" aria-pressed="true">DE</button><button type="button" data-lang="en" aria-pressed="false">EN</button>
+</div>
+<button class="share" type="button" aria-label="Seite teilen" data-i18n-aria="share"><svg aria-hidden="true"><use href="#i-share"/></svg></button>
+
+<main class="wrap">
+  <header class="profile">
+    <h1>TECH SULI</h1>
+    <p class="handle">@TECH.SULI <svg aria-label="Echter Account" data-i18n-aria="verified"><use href="#i-badge"/></svg></p>
+    <p class="bio" data-i18n="bio">Jeden Tag Technik-Videos</p>
+    <p class="place"><svg aria-hidden="true"><use href="#i-pin"/></svg>Germany</p>
+    <ul class="contact" aria-label="Kontakt" data-i18n-aria="contact">
+      <li><a class="cbtn" href="mailto:Techsuli.business@gmail.com?subject=Anfrage" data-mail><svg aria-hidden="true"><use href="#i-mail"/></svg><span>techsuli.business<wbr>@gmail.com</span></a></li>
+      <li><a class="cbtn" href="#kontakt" data-wa target="_blank" rel="noopener"><svg class="wa" aria-hidden="true"><use href="#i-whatsapp"/></svg><span data-i18n="wa">WhatsApp für Kooperationen</span></a></li>
+    </ul>
+  </header>
+
+  <nav aria-label="Meine Kanäle" data-i18n-aria="channels">
+    <ul class="group socials">
+      <li><a class="item" href="https://www.youtube.com/@TechSulii" target="_blank" rel="noopener">
+        <span class="tile yt"><svg aria-hidden="true"><use href="#i-youtube"/></svg></span>
+        <span><span class="t">YouTube</span><span class="s">youtube.com/@TechSulii</span></span>
+        <svg class="arrow" aria-hidden="true"><use href="#i-right"/></svg>
+      </a></li>
+      <li><a class="item" href="https://tiktok.com/@tech.suli" target="_blank" rel="noopener">
+        <span class="tile tt"><svg aria-hidden="true"><use href="#i-tiktok"/></svg></span>
+        <span><span class="t">TikTok</span><span class="s">tiktok.com/@tech.suli</span></span>
+        <svg class="arrow" aria-hidden="true"><use href="#i-right"/></svg>
+      </a></li>
+      <li><a class="item" href="https://instagram.com/tech.suli" target="_blank" rel="noopener">
+        <span class="tile ig"><svg aria-hidden="true"><use href="#i-instagram"/></svg></span>
+        <span><span class="t">Instagram</span><span class="s">instagram.com/tech.suli</span></span>
+        <svg class="arrow" aria-hidden="true"><use href="#i-right"/></svg>
+      </a></li>
+    </ul>
+    <p class="trust"><svg aria-hidden="true"><use href="#i-shield"/></svg><span data-i18n="trust">Das sind meine einzigen echten Accounts.</span></p>
+  </nav>
+
+  <hr class="rule">
+
+  <section aria-labelledby="produkte">
+    <div class="head"><h2 id="produkte" data-i18n="products">Produkte aus meinen Videos</h2><span class="ad" data-i18n="ad">Werbung</span></div>
+    <p class="note" data-i18n="note">Das sind Affiliate-Links. Kaufst du darüber, bekomme ich eine kleine Provision. Für dich ändert sich am Preis nichts.</p>
+    <ul class="group products">
+      <li><a class="item" href="https://swappie.com/de/macbook/?utm_source=tech.suli&amp;utm_medium=influencer&amp;utm_campaign=macbook_launch_de&amp;utm_content=instagram" target="_blank" rel="noopener sponsored">
+        <span class="tile"><svg aria-hidden="true"><use href="#i-link"/></svg></span>
+        <span><span class="t">Refurbished MacBooks | Swappie</span><span class="s">swappie.com/de/macbook</span></span>
+        <svg class="arrow" aria-hidden="true"><use href="#i-right"/></svg>
+      </a></li>
+      <li><a class="item" href="https://swappie.com/de/professionell-refurbished-macbooks" target="_blank" rel="noopener sponsored">
+        <span class="tile"><svg aria-hidden="true"><use href="#i-link"/></svg></span>
+        <span><span class="t" data-i18n="p_swappie2">Dein cleverstes MacBook-Upgrade</span><span class="s">swappie.com/de/professionell-refurbished-macbooks</span></span>
+        <svg class="arrow" aria-hidden="true"><use href="#i-right"/></svg>
+      </a></li>
+      <li><a class="item" href="https://app.temu.com/k/euzpedl14fn" target="_blank" rel="noopener sponsored">
+        <span class="tile"><svg aria-hidden="true"><use href="#i-link"/></svg></span>
+        <span><span class="t">Temu</span><span class="s">app.temu.com/k/euzpedl14fn</span></span>
+        <svg class="arrow" aria-hidden="true"><use href="#i-right"/></svg>
+      </a></li>
+      <li><a class="item" href="https://bit.ly/40eWTc4" target="_blank" rel="noopener sponsored">
+        <span class="tile"><svg aria-hidden="true"><use href="#i-link"/></svg></span>
+        <span><span class="t" data-i18n="p_maono">MAONO Mikrofon: Code PD200W10</span><span class="s">bit.ly/40eWTc4</span></span>
+        <svg class="arrow" aria-hidden="true"><use href="#i-right"/></svg>
+      </a></li>
+      <li><a class="item" href="https://updf.com/de/updf-sales-promotion/?utm_source=tiktok-tech.suli-2601-claire&amp;utm_medium=de&amp;utm_campaign=claire202601&amp;packageKey=overseapromotion" target="_blank" rel="noopener sponsored">
+        <span class="tile"><svg aria-hidden="true"><use href="#i-link"/></svg></span>
+        <span><span class="t" data-i18n="p_updf">UPDF mit KI: zeitlich begrenztes Angebot</span><span class="s">updf.com/de/updf-sales-promotion</span></span>
+        <svg class="arrow" aria-hidden="true"><use href="#i-right"/></svg>
+      </a></li>
+      <li><a class="item" href="https://bit.ly/techie_nomad007DEJOYBUY" target="_blank" rel="noopener sponsored">
+        <span class="tile"><svg aria-hidden="true"><use href="#i-link"/></svg></span>
+        <span><span class="t" data-i18n="p_snow">Schneefräse Joybuy</span><span class="s">bit.ly/techie_nomad007DEJOYBUY</span></span>
+        <svg class="arrow" aria-hidden="true"><use href="#i-right"/></svg>
+      </a></li>
+      <li><a class="item" href="https://s.whaee.com/ojgVKiz" target="_blank" rel="noopener sponsored">
+        <span class="tile"><svg aria-hidden="true"><use href="#i-link"/></svg></span>
+        <span><span class="t" data-i18n="p_cp12">CUKTECH CP12 Powerbank</span><span class="s">s.whaee.com/ojgVKiz</span></span>
+        <svg class="arrow" aria-hidden="true"><use href="#i-right"/></svg>
+      </a></li>
+      <li><a class="item" href="https://s.whaee.com/WyYWq63" target="_blank" rel="noopener sponsored">
+        <span class="tile"><svg aria-hidden="true"><use href="#i-link"/></svg></span>
+        <span><span class="t" data-i18n="p_c20">CUKTECH 20 Powerbank</span><span class="s">s.whaee.com/WyYWq63</span></span>
+        <svg class="arrow" aria-hidden="true"><use href="#i-right"/></svg>
+      </a></li>
+      <li><a class="item" href="https://www.amazon.de/dp/B0FQV9N5B5?maas=maas_adg_312D055B4F019CC8E00F7808FC3D951E_afap_abs" target="_blank" rel="noopener sponsored">
+        <span class="tile"><svg aria-hidden="true"><use href="#i-link"/></svg></span>
+        <span><span class="t" data-i18n="p_icy">ICY BOX 17-in-1 USB-C Dockingstation</span><span class="s">amazon.de/dp/B0FQV9N5B5</span></span>
+        <svg class="arrow" aria-hidden="true"><use href="#i-right"/></svg>
+      </a></li>
+      <li><a class="item" href="https://www.amazon.de/dp/B0FSDQ49RM?maas=maas_adg_2357D6CCCBAA4222D9898C0796827B97_afap_abs" target="_blank" rel="noopener sponsored">
+        <span class="tile"><svg aria-hidden="true"><use href="#i-link"/></svg></span>
+        <span><span class="t">Potensic Atom 2 Fly More Combo</span><span class="s">amazon.de/dp/B0FSDQ49RM</span></span>
+        <svg class="arrow" aria-hidden="true"><use href="#i-right"/></svg>
+      </a></li>
+    </ul>
+  </section>
+
+  <footer>
+    <span>© <span id="jahr">2026</span> Tech Suli</span>
+    <a href="impressum.html" data-i18n="imprint">Impressum</a>
+    <a href="datenschutz.html" data-i18n="privacy">Datenschutz</a>
+  </footer>
+</main>
+
+<script>
+  (function () {
+    var T = {
+      de: {
+        title: "Tech Suli | Technik-News und Leaks",
+        alt: "Suleyman, bekannt als Tech Suli",
+        share: "Seite teilen", copied: "Link kopiert", shareText: "Technik-News und Leaks, jeden Tag neu.",
+        verified: "Echter Account",
+        bio: "Jeden Tag Technik-Videos",
+        contact: "Kontakt",
+        wa: "WhatsApp für Kooperationen",
+        waText: "Hallo Suli, ich habe eine Kooperationsanfrage: ",
+        mailSubject: "Anfrage",
+        channels: "Meine Kanäle",
+        trust: "Das sind meine einzigen echten Accounts.",
+        products: "Produkte aus meinen Videos",
+        ad: "Werbung",
+        note: "Das sind Affiliate-Links. Kaufst du darüber, bekomme ich eine kleine Provision. Für dich ändert sich am Preis nichts.",
+        p_swappie2: "Dein cleverstes MacBook-Upgrade",
+        p_maono: "MAONO Mikrofon: Code PD200W10",
+        p_updf: "UPDF mit KI: zeitlich begrenztes Angebot",
+        p_snow: "Schneefräse Joybuy",
+        p_cp12: "CUKTECH CP12 Powerbank",
+        p_c20: "CUKTECH 20 Powerbank",
+        p_icy: "ICY BOX 17-in-1 USB-C Dockingstation",
+        imprint: "Impressum",
+        privacy: "Datenschutz"
+      },
+      en: {
+        title: "Tech Suli | Daily tech news and leaks",
+        alt: "Suleyman, known as Tech Suli",
+        share: "Share page", copied: "Link copied", shareText: "Daily tech news and leaks.",
+        verified: "Official account",
+        bio: "Daily tech videos",
+        contact: "Contact",
+        wa: "WhatsApp for collaborations",
+        waText: "Hi Suli, I have a collaboration request: ",
+        mailSubject: "Collaboration request",
+        channels: "My channels",
+        trust: "These are my only official accounts.",
+        products: "Products from my videos",
+        ad: "Ad",
+        note: "These are affiliate links. If you buy through them, I earn a small commission at no extra cost to you.",
+        p_swappie2: "Your smartest MacBook upgrade",
+        p_maono: "MAONO microphone: code PD200W10",
+        p_updf: "UPDF with AI: limited-time offer",
+        p_snow: "Joybuy snow blower",
+        p_cp12: "CUKTECH CP12 power bank",
+        p_c20: "CUKTECH 20 power bank",
+        p_icy: "ICY BOX 17-in-1 USB-C docking station",
+        imprint: "Legal notice",
+        privacy: "Privacy policy"
+      }
+    };
+    var lang = "de";
+
+    function store(key, value) { try { localStorage.setItem(key, value); } catch (e) {} }
+    function read(key) { try { return localStorage.getItem(key); } catch (e) { return null; } }
+
+    function apply(next) {
+      lang = T[next] ? next : "en";
+      var t = T[lang];
+      document.documentElement.lang = lang;
+      document.title = t.title;
+      document.querySelectorAll("[data-i18n]").forEach(function (el) { el.textContent = t[el.getAttribute("data-i18n")]; });
+      document.querySelectorAll("[data-i18n-aria]").forEach(function (el) { el.setAttribute("aria-label", t[el.getAttribute("data-i18n-aria")]); });
+      document.querySelectorAll("[data-i18n-alt]").forEach(function (el) { el.setAttribute("alt", t[el.getAttribute("data-i18n-alt")]); });
+      document.querySelector("[data-mail]").href = "mailto:Techsuli.business@gmail.com?subject=" + encodeURIComponent(t.mailSubject);
+      document.querySelectorAll("[data-lang]").forEach(function (b) { b.setAttribute("aria-pressed", b.getAttribute("data-lang") === lang ? "true" : "false"); });
+    }
+
+    // Gespeicherte Wahl, sonst Browsersprache: Deutsch für deutsche Browser, sonst Englisch
+    var saved = read("lang");
+    var browserDe = (navigator.languages || [navigator.language || ""]).some(function (l) { return /^de\b/i.test(l); });
+    apply(saved || (browserDe ? "de" : "en"));
+
+    document.querySelectorAll("[data-lang]").forEach(function (b) {
+      b.addEventListener("click", function () {
+        apply(b.getAttribute("data-lang"));
+        store("lang", lang);
+      });
+    });
+
+    document.getElementById("jahr").textContent = new Date().getFullYear();
+
+    // WhatsApp-Link erst beim Antippen zusammensetzen, damit die Nummer nicht im Quelltext steht
+    document.querySelector("[data-wa]").addEventListener("click", function (e) {
+      e.preventDefault();
+      var n = ["0073", "921", "172", "49"].reverse().join("");
+      window.open("https://wa.me/" + n + "?text=" + encodeURIComponent(T[lang].waText), "_blank", "noopener");
+    });
+
+    var share = document.querySelector(".share");
+    var url = location.href.split("#")[0];
+    share.addEventListener("click", function () {
+      if (navigator.share) {
+        navigator.share({ title: "Tech Suli", text: T[lang].shareText, url: url }).catch(function () {});
+      } else if (navigator.clipboard) {
+        navigator.clipboard.writeText(url).then(function () {
+          share.setAttribute("aria-label", T[lang].copied);
+          setTimeout(function () { share.setAttribute("aria-label", T[lang].share); }, 2000);
+        });
+      }
+    });
+  })();
+</script>
+</body>
+</html>

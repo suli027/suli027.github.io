@@ -1,0 +1,37 @@
+/* Lokal gehostet (kein Google-Server-Aufruf, DSGVO-freundlich) */
+@font-face {
+  font-family: "Schibsted Grotesk";
+  src: url("fonts/schibsted-normal-400-900.woff2") format("woff2");
+  font-weight: 400 900;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Onest";
+  src: url("fonts/onest-normal-300-800.woff2") format("woff2");
+  font-weight: 300 800;
+  font-style: normal;
+  font-display: swap;
+}
+/* Clash Grotesk von Fontshare (ITF Free Font License), lokal gehostet */
+@font-face {
+  font-family: "Clash Grotesk";
+  src: url("fonts/clash-grotesk-500.woff2") format("woff2");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Clash Grotesk";
+  src: url("fonts/clash-grotesk-600.woff2") format("woff2");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Clash Grotesk";
+  src: url("fonts/clash-grotesk-700.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
