@@ -156,6 +156,25 @@
     box-shadow: 0 10px 16px -6px rgba(20, 20, 22, .45);
   }
   .tile svg { width: 28px; height: 28px; }
+  /* Produktbild statt Symbol: weiße Kachel, Bild liegt drin */
+  .tile.ph { background: #fff; overflow: hidden; }
+  .tile.ph img { width: 100%; height: 100%; object-fit: cover; }
+  .tile.temu { background: #FB7701; font-size: .9375rem; font-weight: 700; letter-spacing: .02em; }
+
+  /* Rabattcode als Streifen direkt unter der Karte */
+  .has-code .item { height: auto; }
+  .code {
+    display: flex; align-items: center; gap: 6px; width: calc(100% - 10px); min-height: 44px;
+    margin: 0 0 0 10px; padding: 8px 16px;
+    border: 0; border-top: 1.5px dashed #D5D5DA;
+    background: var(--card); color: var(--ink-2);
+    font: inherit; font-size: .9375rem; font-weight: 500; text-align: left;
+    box-shadow: 0 16px 32px -14px rgba(20, 20, 22, .14);
+    cursor: pointer;
+  }
+  .code b { color: var(--ink); font-weight: 700; letter-spacing: .04em; }
+  .code-act { margin-left: auto; padding: 4px 10px; background: var(--ink); color: #fff; font-size: .8125rem; font-weight: 600; transition: background-color .2s var(--ease-out); }
+  .code.done .code-act { background: var(--ok); }
   .yt { background: #E62117; }
   .tt { background: #000; }
   .ig { background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%); }
@@ -180,8 +199,26 @@
   .trust { display: flex; align-items: center; justify-content: center; gap: 8px; margin: 36px 0 0; color: var(--ink-2); font-size: .9375rem; text-align: center; }
   .trust svg { width: 18px; height: 18px; color: var(--ok); flex: none; }
   footer { display: flex; justify-content: center; flex-wrap: wrap; gap: 6px 22px; margin-top: 14px; font-size: .875rem; color: var(--ink-2); padding-bottom: env(safe-area-inset-bottom); }
-  footer a { text-decoration: none; }
-  footer a:hover { color: var(--ink); text-decoration: underline; text-underline-offset: 3px; }
+  footer a, .linkbtn { text-decoration: none; }
+  .linkbtn { padding: 0; border: 0; background: none; color: inherit; font: inherit; cursor: pointer; }
+  .linkbtn:hover { color: var(--ink); text-decoration: underline; text-underline-offset: 3px; }
+
+  /* Cookie-Banner: unten, beide Knöpfe gleich groß */
+  .consent {
+    position: fixed; z-index: 10; left: 12px; right: 12px; bottom: max(12px, env(safe-area-inset-bottom));
+    max-width: 560px; margin: 0 auto; padding: 20px 20px 18px;
+    background: var(--card); color: var(--ink);
+    border-top: 3px solid var(--ink);
+    box-shadow: 0 24px 60px -12px rgba(20, 20, 22, .35);
+  }
+  .consent[hidden] { display: none; }
+  .consent h2 { margin: 0; font-size: 1.25rem; font-weight: 700; letter-spacing: .005em; }
+  .consent p { margin: 8px 0 16px; color: var(--ink-2); font-size: .9375rem; line-height: 1.45; }
+  .consent p a { color: var(--ink); font-weight: 600; text-underline-offset: 3px; }
+  .consent-btns { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .cb { min-height: 48px; border: 1.5px solid var(--ink); background: var(--card); color: var(--ink); font: inherit; font-size: 1rem; font-weight: 600; cursor: pointer; }
+  .cb-yes { background: var(--ink); color: #fff; }
+  footer a:hover, footer .linkbtn:hover { color: var(--ink); text-decoration: underline; text-underline-offset: 3px; }
 
   /* Ein Moment beim Laden: das Foto zieht sanft heran */
   @media (prefers-reduced-motion: no-preference) {
@@ -202,6 +239,7 @@
     .contact { grid-template-columns: 1fr 1fr; }
     .group { grid-template-columns: 1fr 1fr; column-gap: 18px; row-gap: 20px; }
     .socials li:first-child { grid-column: 1 / -1; }
+    .products { align-items: start; }
   }
 </style>
 </head>
@@ -242,24 +280,24 @@
     <p class="bio" data-i18n="bio">Jeden Tag Technik-Videos</p>
     <p class="place"><svg aria-hidden="true"><use href="#i-pin"/></svg>Germany</p>
     <ul class="contact" aria-label="Kontakt" data-i18n-aria="contact">
-      <li><a class="cbtn" href="mailto:Techsuli.business@gmail.com?subject=Anfrage" data-mail><svg aria-hidden="true"><use href="#i-mail"/></svg><span>techsuli.business<wbr>@gmail.com</span></a></li>
-      <li><a class="cbtn" href="#kontakt" data-wa target="_blank" rel="noopener"><svg class="wa" aria-hidden="true"><use href="#i-whatsapp"/></svg><span data-i18n="wa">WhatsApp für Kooperationen</span></a></li>
+      <li><a class="cbtn" href="mailto:Techsuli.business@gmail.com?subject=Anfrage" data-mail data-track="mail"><svg aria-hidden="true"><use href="#i-mail"/></svg><span>techsuli.business<wbr>@gmail.com</span></a></li>
+      <li><a class="cbtn" href="#kontakt" data-wa data-track="whatsapp" target="_blank" rel="noopener"><svg class="wa" aria-hidden="true"><use href="#i-whatsapp"/></svg><span data-i18n="wa">WhatsApp für Kooperationen</span></a></li>
     </ul>
   </header>
 
   <nav aria-label="Meine Kanäle" data-i18n-aria="channels">
     <ul class="group socials">
-      <li><a class="item" href="https://www.youtube.com/@TechSulii" target="_blank" rel="noopener">
+      <li><a class="item" href="https://www.youtube.com/@TechSulii" target="_blank" rel="noopener" data-track="youtube">
         <span class="tile yt"><svg aria-hidden="true"><use href="#i-youtube"/></svg></span>
         <span><span class="t">YouTube</span><span class="s">youtube.com/@TechSulii</span></span>
         <svg class="arrow" aria-hidden="true"><use href="#i-right"/></svg>
       </a></li>
-      <li><a class="item" href="https://tiktok.com/@tech.suli" target="_blank" rel="noopener">
+      <li><a class="item" href="https://tiktok.com/@tech.suli" target="_blank" rel="noopener" data-track="tiktok">
         <span class="tile tt"><svg aria-hidden="true"><use href="#i-tiktok"/></svg></span>
         <span><span class="t">TikTok</span><span class="s">tiktok.com/@tech.suli</span></span>
         <svg class="arrow" aria-hidden="true"><use href="#i-right"/></svg>
       </a></li>
-      <li><a class="item" href="https://instagram.com/tech.suli" target="_blank" rel="noopener">
+      <li><a class="item" href="https://instagram.com/tech.suli" target="_blank" rel="noopener" data-track="instagram">
         <span class="tile ig"><svg aria-hidden="true"><use href="#i-instagram"/></svg></span>
         <span><span class="t">Instagram</span><span class="s">instagram.com/tech.suli</span></span>
         <svg class="arrow" aria-hidden="true"><use href="#i-right"/></svg>
@@ -274,54 +312,55 @@
     <div class="head"><h2 id="produkte" data-i18n="products">Produkte aus meinen Videos</h2><span class="ad" data-i18n="ad">Werbung</span></div>
     <p class="note" data-i18n="note">Das sind Affiliate-Links. Kaufst du darüber, bekomme ich eine kleine Provision. Für dich ändert sich am Preis nichts.</p>
     <ul class="group products">
-      <li><a class="item" href="https://swappie.com/de/macbook/?utm_source=tech.suli&amp;utm_medium=influencer&amp;utm_campaign=macbook_launch_de&amp;utm_content=instagram" target="_blank" rel="noopener sponsored">
-        <span class="tile"><svg aria-hidden="true"><use href="#i-link"/></svg></span>
-        <span><span class="t">Refurbished MacBooks | Swappie</span><span class="s">swappie.com/de/macbook</span></span>
+      <li><a class="item" href="https://swappie.com/de/macbook/?utm_source=tech.suli&amp;utm_medium=influencer&amp;utm_campaign=macbook_launch_de&amp;utm_content=instagram" target="_blank" rel="noopener sponsored" data-track="swappie-macbook">
+        <span class="tile ph"><img src="assets/produkte/swappie.webp" width="160" height="160" alt="" decoding="async"></span>
+        <span><span class="t" data-i18n="p_swappie1">Refurbished MacBooks</span><span class="s">Swappie</span></span>
         <svg class="arrow" aria-hidden="true"><use href="#i-right"/></svg>
       </a></li>
-      <li><a class="item" href="https://swappie.com/de/professionell-refurbished-macbooks" target="_blank" rel="noopener sponsored">
-        <span class="tile"><svg aria-hidden="true"><use href="#i-link"/></svg></span>
-        <span><span class="t" data-i18n="p_swappie2">Dein cleverstes MacBook-Upgrade</span><span class="s">swappie.com/de/professionell-refurbished-macbooks</span></span>
+      <li><a class="item" href="https://swappie.com/de/professionell-refurbished-macbooks" target="_blank" rel="noopener sponsored" data-track="swappie-pro">
+        <span class="tile ph"><img src="assets/produkte/swappie.webp" width="160" height="160" alt="" decoding="async"></span>
+        <span><span class="t" data-i18n="p_swappie2">Professionell aufbereitete MacBooks</span><span class="s">Swappie</span></span>
         <svg class="arrow" aria-hidden="true"><use href="#i-right"/></svg>
       </a></li>
-      <li><a class="item" href="https://app.temu.com/k/euzpedl14fn" target="_blank" rel="noopener sponsored">
-        <span class="tile"><svg aria-hidden="true"><use href="#i-link"/></svg></span>
-        <span><span class="t">Temu</span><span class="s">app.temu.com/k/euzpedl14fn</span></span>
+      <li><a class="item" href="https://app.temu.com/k/euzpedl14fn" target="_blank" rel="noopener sponsored" data-track="temu">
+        <span class="tile temu" aria-hidden="true">Temu</span>
+        <span><span class="t" data-i18n="p_temu">Temu Angebote</span><span class="s">Temu</span></span>
         <svg class="arrow" aria-hidden="true"><use href="#i-right"/></svg>
       </a></li>
-      <li><a class="item" href="https://bit.ly/40eWTc4" target="_blank" rel="noopener sponsored">
-        <span class="tile"><svg aria-hidden="true"><use href="#i-link"/></svg></span>
-        <span><span class="t" data-i18n="p_maono">MAONO Mikrofon: Code PD200W10</span><span class="s">bit.ly/40eWTc4</span></span>
+      <li class="has-code"><a class="item" href="https://bit.ly/40eWTc4" target="_blank" rel="noopener sponsored" data-track="maono">
+        <span class="tile ph"><img src="assets/produkte/maono.webp" width="160" height="160" alt="" decoding="async"></span>
+        <span><span class="t" data-i18n="p_maono">MAONO PD200W Mikrofon</span><span class="s">Amazon</span></span>
+        <svg class="arrow" aria-hidden="true"><use href="#i-right"/></svg>
+      </a>
+        <button class="code" type="button" data-code="PD200W10"><span data-i18n="codeLabel">10 % Rabatt mit Code</span> <b>PD200W10</b><span class="code-act" data-i18n="copy">Kopieren</span></button></li>
+      <li><a class="item" href="https://updf.com/de/updf-sales-promotion/?utm_source=tiktok-tech.suli-2601-claire&amp;utm_medium=de&amp;utm_campaign=claire202601&amp;packageKey=overseapromotion" target="_blank" rel="noopener sponsored" data-track="updf">
+        <span class="tile ph"><img src="assets/produkte/updf.webp" width="160" height="160" alt="" decoding="async"></span>
+        <span><span class="t" data-i18n="p_updf">UPDF PDF-Editor mit KI</span><span class="s">UPDF</span></span>
         <svg class="arrow" aria-hidden="true"><use href="#i-right"/></svg>
       </a></li>
-      <li><a class="item" href="https://updf.com/de/updf-sales-promotion/?utm_source=tiktok-tech.suli-2601-claire&amp;utm_medium=de&amp;utm_campaign=claire202601&amp;packageKey=overseapromotion" target="_blank" rel="noopener sponsored">
-        <span class="tile"><svg aria-hidden="true"><use href="#i-link"/></svg></span>
-        <span><span class="t" data-i18n="p_updf">UPDF mit KI: zeitlich begrenztes Angebot</span><span class="s">updf.com/de/updf-sales-promotion</span></span>
+      <li><a class="item" href="https://bit.ly/techie_nomad007DEJOYBUY" target="_blank" rel="noopener sponsored" data-track="yarbo">
+        <span class="tile ph"><img src="assets/produkte/yarbo.webp" width="160" height="160" alt="" decoding="async"></span>
+        <span><span class="t" data-i18n="p_snow">Yarbo Schneefräsen-Roboter</span><span class="s">Joybuy</span></span>
         <svg class="arrow" aria-hidden="true"><use href="#i-right"/></svg>
       </a></li>
-      <li><a class="item" href="https://bit.ly/techie_nomad007DEJOYBUY" target="_blank" rel="noopener sponsored">
-        <span class="tile"><svg aria-hidden="true"><use href="#i-link"/></svg></span>
-        <span><span class="t" data-i18n="p_snow">Schneefräse Joybuy</span><span class="s">bit.ly/techie_nomad007DEJOYBUY</span></span>
+      <li><a class="item" href="https://s.whaee.com/ojgVKiz" target="_blank" rel="noopener sponsored" data-track="cuktech-cp12">
+        <span class="tile ph"><img src="assets/produkte/cuktech-cp12.webp" width="160" height="160" alt="" decoding="async"></span>
+        <span><span class="t" data-i18n="p_cp12">CUKTECH CP12 Magnet-Powerbank</span><span class="s">Amazon</span></span>
         <svg class="arrow" aria-hidden="true"><use href="#i-right"/></svg>
       </a></li>
-      <li><a class="item" href="https://s.whaee.com/ojgVKiz" target="_blank" rel="noopener sponsored">
-        <span class="tile"><svg aria-hidden="true"><use href="#i-link"/></svg></span>
-        <span><span class="t" data-i18n="p_cp12">CUKTECH CP12 Powerbank</span><span class="s">s.whaee.com/ojgVKiz</span></span>
+      <li><a class="item" href="https://s.whaee.com/WyYWq63" target="_blank" rel="noopener sponsored" data-track="cuktech-20">
+        <span class="tile ph"><img src="assets/produkte/cuktech-20.webp" width="160" height="160" alt="" decoding="async"></span>
+        <span><span class="t" data-i18n="p_c20">CUKTECH 20 Powerbank, 140 W</span><span class="s">Amazon</span></span>
         <svg class="arrow" aria-hidden="true"><use href="#i-right"/></svg>
       </a></li>
-      <li><a class="item" href="https://s.whaee.com/WyYWq63" target="_blank" rel="noopener sponsored">
-        <span class="tile"><svg aria-hidden="true"><use href="#i-link"/></svg></span>
-        <span><span class="t" data-i18n="p_c20">CUKTECH 20 Powerbank</span><span class="s">s.whaee.com/WyYWq63</span></span>
+      <li><a class="item" href="https://www.amazon.de/dp/B0FQV9N5B5?maas=maas_adg_312D055B4F019CC8E00F7808FC3D951E_afap_abs" target="_blank" rel="noopener sponsored" data-track="icybox">
+        <span class="tile ph"><img src="assets/produkte/icybox.webp" width="160" height="160" alt="" decoding="async"></span>
+        <span><span class="t" data-i18n="p_icy">ICY BOX Dockingstation 17-in-1</span><span class="s">Amazon</span></span>
         <svg class="arrow" aria-hidden="true"><use href="#i-right"/></svg>
       </a></li>
-      <li><a class="item" href="https://www.amazon.de/dp/B0FQV9N5B5?maas=maas_adg_312D055B4F019CC8E00F7808FC3D951E_afap_abs" target="_blank" rel="noopener sponsored">
-        <span class="tile"><svg aria-hidden="true"><use href="#i-link"/></svg></span>
-        <span><span class="t" data-i18n="p_icy">ICY BOX 17-in-1 USB-C Dockingstation</span><span class="s">amazon.de/dp/B0FQV9N5B5</span></span>
-        <svg class="arrow" aria-hidden="true"><use href="#i-right"/></svg>
-      </a></li>
-      <li><a class="item" href="https://www.amazon.de/dp/B0FSDQ49RM?maas=maas_adg_2357D6CCCBAA4222D9898C0796827B97_afap_abs" target="_blank" rel="noopener sponsored">
-        <span class="tile"><svg aria-hidden="true"><use href="#i-link"/></svg></span>
-        <span><span class="t">Potensic Atom 2 Fly More Combo</span><span class="s">amazon.de/dp/B0FSDQ49RM</span></span>
+      <li><a class="item" href="https://www.amazon.de/dp/B0FSDQ49RM?maas=maas_adg_2357D6CCCBAA4222D9898C0796827B97_afap_abs" target="_blank" rel="noopener sponsored" data-track="potensic">
+        <span class="tile ph"><img src="assets/produkte/potensic.webp" width="160" height="160" alt="" decoding="async"></span>
+        <span><span class="t" data-i18n="p_drone">Potensic Atom 2 Drohne</span><span class="s">Amazon</span></span>
         <svg class="arrow" aria-hidden="true"><use href="#i-right"/></svg>
       </a></li>
     </ul>
@@ -331,8 +370,18 @@
     <span>© <span id="jahr">2026</span> Tech Suli</span>
     <a href="impressum.html" data-i18n="imprint">Impressum</a>
     <a href="datenschutz.html" data-i18n="privacy">Datenschutz</a>
+    <button class="linkbtn" type="button" data-consent-open data-i18n="cookieSettings">Cookie-Einstellungen</button>
   </footer>
 </main>
+
+<div class="consent" role="dialog" aria-labelledby="consent-t" aria-describedby="consent-d" hidden>
+  <h2 id="consent-t" data-i18n="consentTitle">Cookies und Statistik</h2>
+  <p id="consent-d"><span data-i18n="consentText">Ich würde gern sehen, wie die Seite genutzt wird: welche Links angetippt werden, wie gescrollt wird und woher Besucher kommen. Dafür nutze ich PostHog mit Servern in Frankfurt. Dabei werden Cookies gesetzt und Sitzungen anonym aufgezeichnet. Das passiert nur, wenn du zustimmst. Ändern kannst du das jederzeit unten unter „Cookie-Einstellungen“.</span> <a href="datenschutz.html#statistik" data-i18n="consentMore">Mehr dazu</a></p>
+  <div class="consent-btns">
+    <button type="button" class="cb" data-consent="no" data-i18n="reject">Ablehnen</button>
+    <button type="button" class="cb cb-yes" data-consent="yes" data-i18n="accept">Akzeptieren</button>
+  </div>
+</div>
 
 <script>
   (function () {
@@ -352,15 +401,25 @@
         products: "Produkte aus meinen Videos",
         ad: "Werbung",
         note: "Das sind Affiliate-Links. Kaufst du darüber, bekomme ich eine kleine Provision. Für dich ändert sich am Preis nichts.",
-        p_swappie2: "Dein cleverstes MacBook-Upgrade",
-        p_maono: "MAONO Mikrofon: Code PD200W10",
-        p_updf: "UPDF mit KI: zeitlich begrenztes Angebot",
-        p_snow: "Schneefräse Joybuy",
-        p_cp12: "CUKTECH CP12 Powerbank",
-        p_c20: "CUKTECH 20 Powerbank",
-        p_icy: "ICY BOX 17-in-1 USB-C Dockingstation",
+        p_swappie1: "Refurbished MacBooks",
+        p_swappie2: "Professionell aufbereitete MacBooks",
+        p_temu: "Temu Angebote",
+        p_maono: "MAONO PD200W Mikrofon",
+        p_updf: "UPDF PDF-Editor mit KI",
+        p_snow: "Yarbo Schneefräsen-Roboter",
+        p_cp12: "CUKTECH CP12 Magnet-Powerbank",
+        p_c20: "CUKTECH 20 Powerbank, 140 W",
+        p_icy: "ICY BOX Dockingstation 17-in-1",
+        p_drone: "Potensic Atom 2 Drohne",
+        codeLabel: "10 % Rabatt mit Code",
+        copy: "Kopieren", codeCopied: "Kopiert",
         imprint: "Impressum",
-        privacy: "Datenschutz"
+        privacy: "Datenschutz",
+        cookieSettings: "Cookie-Einstellungen",
+        consentTitle: "Cookies und Statistik",
+        consentText: "Ich würde gern sehen, wie die Seite genutzt wird: welche Links angetippt werden, wie gescrollt wird und woher Besucher kommen. Dafür nutze ich PostHog mit Servern in Frankfurt. Dabei werden Cookies gesetzt und Sitzungen anonym aufgezeichnet. Das passiert nur, wenn du zustimmst. Ändern kannst du das jederzeit unten unter „Cookie-Einstellungen“.",
+        consentMore: "Mehr dazu",
+        accept: "Akzeptieren", reject: "Ablehnen"
       },
       en: {
         title: "Tech Suli | Daily tech news and leaks",
@@ -377,15 +436,25 @@
         products: "Products from my videos",
         ad: "Ad",
         note: "These are affiliate links. If you buy through them, I earn a small commission at no extra cost to you.",
-        p_swappie2: "Your smartest MacBook upgrade",
-        p_maono: "MAONO microphone: code PD200W10",
-        p_updf: "UPDF with AI: limited-time offer",
-        p_snow: "Joybuy snow blower",
-        p_cp12: "CUKTECH CP12 power bank",
-        p_c20: "CUKTECH 20 power bank",
-        p_icy: "ICY BOX 17-in-1 USB-C docking station",
+        p_swappie1: "Refurbished MacBooks",
+        p_swappie2: "Professionally refurbished MacBooks",
+        p_temu: "Temu deals",
+        p_maono: "MAONO PD200W microphone",
+        p_updf: "UPDF AI PDF editor",
+        p_snow: "Yarbo robot snow blower",
+        p_cp12: "CUKTECH CP12 magnetic power bank",
+        p_c20: "CUKTECH 20 power bank, 140 W",
+        p_icy: "ICY BOX 17-in-1 docking station",
+        p_drone: "Potensic Atom 2 drone",
+        codeLabel: "10% off with code",
+        copy: "Copy", codeCopied: "Copied",
         imprint: "Legal notice",
-        privacy: "Privacy policy"
+        privacy: "Privacy policy",
+        cookieSettings: "Cookie settings",
+        consentTitle: "Cookies and statistics",
+        consentText: "I'd like to see how this page is used: which links get tapped, how people scroll and where visitors come from. For this I use PostHog with servers in Frankfurt, Germany. This sets cookies and records sessions anonymously. It only happens if you agree. You can change this at any time under “Cookie settings” at the bottom.",
+        consentMore: "Learn more",
+        accept: "Accept", reject: "Decline"
       }
     };
     var lang = "de";
@@ -414,6 +483,8 @@
       b.addEventListener("click", function () {
         apply(b.getAttribute("data-lang"));
         store("lang", lang);
+        track("sprache_gewechselt", { sprache: lang });
+        if (analyticsOn) window.posthog.register({ sprache: lang });
       });
     });
 
@@ -426,9 +497,80 @@
       window.open("https://wa.me/" + n + "?text=" + encodeURIComponent(T[lang].waText), "_blank", "noopener");
     });
 
+    // Rabattcode kopieren
+    document.querySelectorAll("[data-code]").forEach(function (b) {
+      b.addEventListener("click", function () {
+        var act = b.querySelector(".code-act");
+        var done = function () {
+          b.classList.add("done"); act.textContent = T[lang].codeCopied;
+          setTimeout(function () { b.classList.remove("done"); act.textContent = T[lang].copy; }, 2000);
+        };
+        track("code_kopiert", { code: b.getAttribute("data-code") });
+        if (navigator.clipboard) navigator.clipboard.writeText(b.getAttribute("data-code")).then(done, function () {});
+      });
+    });
+
+    // Statistik mit PostHog (EU), startet erst nach Zustimmung
+    var PH_KEY = "";
+    var analyticsOn = false;
+    function track(name, props) { if (analyticsOn && window.posthog) window.posthog.capture(name, props || {}); }
+    function startAnalytics() {
+      if (analyticsOn || !PH_KEY) return;
+      analyticsOn = true;
+      !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.crossOrigin="anonymous",p.async=!0,p.src=s.api_host.replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],Object.defineProperty(u,"toString",{configurable:!0,enumerable:!0,writable:!0,value:function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e}}),Object.defineProperty(u.people,"toString",{configurable:!0,enumerable:!0,writable:!0,value:function(){return u.toString(1)+".people (stub)"}}),o="init capture register register_once register_for_session unregister unregister_for_session getFeatureFlag getFeatureFlagResult isFeatureEnabled reloadFeatureFlags updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures on onFeatureFlags onSessionId getSurveys getActiveMatchingSurveys renderSurvey canRenderSurvey getNextSurveyStep identify setPersonProperties group resetGroups setPersonPropertiesForFlags resetPersonPropertiesForFlags setGroupPropertiesForFlags resetGroupPropertiesForFlags reset get_distinct_id getGroups get_session_id get_session_replay_url alias set_config startSessionRecording stopSessionRecording sessionRecordingStarted captureException loadToolbar get_property getSessionProperty createPersonProfile opt_in_capturing opt_out_capturing has_opted_in_capturing has_opted_out_capturing clear_opt_in_out_capturing debug".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+      window.posthog.init(PH_KEY, {
+        api_host: "https://eu.i.posthog.com",
+        defaults: "2026-08-30",
+        person_profiles: "always",
+        autocapture: true,
+        capture_pageview: true,
+        capture_pageleave: true,
+        session_recording: { maskAllInputs: true }
+      });
+      window.posthog.register({ sprache: lang });
+    }
+    function stopAnalytics() {
+      if (window.posthog && window.posthog.opt_out_capturing) { window.posthog.opt_out_capturing(); window.posthog.reset(); }
+      document.cookie.split(";").forEach(function (c) {
+        var name = c.split("=")[0].trim();
+        if (/^ph_/.test(name)) document.cookie = name + "=; Max-Age=0; path=/; domain=" + location.hostname.replace(/^www\./, "");
+        if (/^ph_/.test(name)) document.cookie = name + "=; Max-Age=0; path=/";
+      });
+      try { Object.keys(localStorage).forEach(function (k) { if (/^ph_|^__ph/.test(k)) localStorage.removeItem(k); }); } catch (e) {}
+      try { Object.keys(sessionStorage).forEach(function (k) { if (/^ph_|^__ph/.test(k)) sessionStorage.removeItem(k); }); } catch (e) {}
+    }
+
+    var banner = document.querySelector(".consent");
+    function decide(choice) {
+      store("consent", choice);
+      banner.hidden = true;
+      if (choice === "yes") startAnalytics();
+      else if (analyticsOn) { stopAnalytics(); location.reload(); }
+      else stopAnalytics();
+    }
+    document.querySelectorAll("[data-consent]").forEach(function (b) {
+      b.addEventListener("click", function () { decide(b.getAttribute("data-consent")); });
+    });
+    document.querySelector("[data-consent-open]").addEventListener("click", function () {
+      banner.hidden = false;
+      banner.querySelector(".cb").focus();
+    });
+    var consent = read("consent");
+    if (consent === "yes") startAnalytics();
+    else if (consent !== "no") banner.hidden = false;
+
+    // Jeder Klick auf einen Link wird mit Namen und Bereich gezählt
+    document.querySelectorAll("[data-track]").forEach(function (a) {
+      a.addEventListener("click", function () {
+        var area = a.closest(".products") ? "produkt" : a.closest(".socials") ? "kanal" : "kontakt";
+        track("link_klick", { ziel: a.getAttribute("data-track"), bereich: area });
+      });
+    });
+
     var share = document.querySelector(".share");
     var url = location.href.split("#")[0];
     share.addEventListener("click", function () {
+      track("seite_geteilt");
       if (navigator.share) {
         navigator.share({ title: "Tech Suli", text: T[lang].shareText, url: url }).catch(function () {});
       } else if (navigator.clipboard) {
