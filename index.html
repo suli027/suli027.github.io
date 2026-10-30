@@ -49,7 +49,6 @@
     line-height: 1.5;
     -webkit-font-smoothing: antialiased;
     min-height: 100dvh;
-    overflow-x: clip;
   }
   ::selection { background: var(--ink); color: #fff; }
   a { color: inherit; }
@@ -123,6 +122,7 @@
     background: var(--card); color: var(--ink);
     font-weight: 600; letter-spacing: .01em; font-size: clamp(.9375rem, 4vw, 1.0625rem);
     text-decoration: none;
+    box-shadow: 4px 4px 0 var(--c, var(--ink));
     transition: background-color .2s var(--ease-out), color .2s var(--ease-out);
   }
   .cbtn:hover { background: var(--ink); color: #fff; }
@@ -143,11 +143,18 @@
     padding: 12px 22px 12px 70px;
     background: var(--card);
     text-decoration: none;
-    box-shadow: 0 16px 32px -14px rgba(20, 20, 22, .14);
-    transition: transform .25s var(--ease-out), box-shadow .25s var(--ease-out);
+    z-index: 1;
+    transition: transform .25s var(--ease-out);
   }
-  .item:hover { transform: translateY(-2px); box-shadow: 0 20px 36px -14px rgba(20, 20, 22, .22); }
-  .item:active { transform: scale(.99); }
+  .item:hover { transform: translate(-2px, -2px); }
+  .item:active { transform: translate(3px, 3px); }
+  /* Schatten nach unten rechts in der Farbe des Logos (--c steht am Eintrag) */
+  .group > li, .lift { position: relative; }
+  .group > li::before, .lift::before {
+    content: "";
+    position: absolute; left: 15px; right: -5px; top: 5px; bottom: -5px;
+    background: var(--c, var(--ink));
+  }
   .item > span:not(.tile) { min-width: 0; }
   .tile {
     position: absolute; left: -10px; top: 50%;
@@ -170,7 +177,7 @@
     border: 0; border-top: 1.5px dashed #D5D5DA;
     background: var(--card); color: var(--ink-2);
     font: inherit; font-size: .9375rem; font-weight: 500; text-align: left;
-    box-shadow: 0 16px 32px -14px rgba(20, 20, 22, .14);
+    position: relative; z-index: 1;
     cursor: pointer;
   }
   .code b { color: var(--ink); font-weight: 700; letter-spacing: .04em; }
@@ -179,6 +186,7 @@
   .yt { background: #E62117; }
   .tt { background: #000; }
   .ig { background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%); }
+  .c-ig { --c: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%); }
   .t { display: block; font-size: clamp(1rem, 4.4vw, 1.125rem); font-weight: 600; letter-spacing: 0; line-height: 1.25; }
   .s { display: block; margin-top: 3px; font-size: .9375rem; font-weight: 500; color: #6E6E74; line-height: 1.3; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
   .arrow { width: 20px; height: 20px; color: #8A8A90; transition: transform .25s var(--ease-out), color .25s var(--ease-out); }
@@ -190,27 +198,13 @@
   .socials .tile svg { width: 34px; height: 34px; }
   .socials .t, .app .t { font-size: 1.375rem; }
 
-  /* Eigene App: Karte, Handys und Vorteile mit Knopf stehen jeder für sich.
-     Am Handy immer ein iPhone genau in der Mitte, die Nachbarn schauen links und rechts hervor. */
+  /* Eigene App: Karte oben, darunter die Erklärung mit Knopf */
   .app { margin-top: 32px; }
   .app .item { height: auto; }
   .app .s { white-space: normal; }
-  .shots {
-    --phone: min(64vw, 280px);
-    list-style: none; margin: 24px calc(50% - 50vw) 0; padding: 0 calc(50vw - var(--phone) / 2);
-    display: grid; grid-auto-flow: column; grid-auto-columns: var(--phone); gap: 14px;
-    overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none;
-  }
-  .shots::-webkit-scrollbar { display: none; }
-  .shots li { scroll-snap-align: center; }
-  .shots img {
-    width: 100%; height: auto;
-    -webkit-mask-image: linear-gradient(to bottom, #000 74%, transparent);
-    mask-image: linear-gradient(to bottom, #000 74%, transparent);
-  }
   .app-info {
     display: grid; gap: 16px;
-    margin: 20px 0 0 10px; padding: 20px 16px;
+    margin: 25px 0 0 10px; padding: 20px 16px;
     background: var(--card);
     box-shadow: 0 16px 32px -14px rgba(20, 20, 22, .14);
   }
@@ -235,7 +229,7 @@
 
   .trust { display: flex; align-items: center; justify-content: center; gap: 8px; margin: 36px 0 0; color: var(--ink-2); font-size: .9375rem; text-align: center; }
   .trust svg { width: 18px; height: 18px; color: var(--ok); flex: none; }
-  footer { display: flex; justify-content: center; flex-wrap: wrap; gap: 6px 22px; margin-top: 14px; font-size: .875rem; color: var(--ink-2); padding-bottom: env(safe-area-inset-bottom); }
+  footer { display: flex; justify-content: center; flex-wrap: wrap; gap: 6px 22px; margin-top: 28px; font-size: .875rem; color: var(--ink-2); padding-bottom: env(safe-area-inset-bottom); }
   footer a, .linkbtn { text-decoration: none; }
   .linkbtn { padding: 0; border: 0; background: none; color: inherit; font: inherit; cursor: pointer; }
   .linkbtn:hover { color: var(--ink); text-decoration: underline; text-underline-offset: 3px; }
@@ -279,7 +273,6 @@
     .products { align-items: start; }
   }
   @media (min-width: 1100px) {
-    .shots { margin-left: 10px; margin-right: 0; padding: 0; grid-auto-columns: 1fr; overflow: visible; }
     .app-info { grid-template-columns: 1fr 1fr; gap: 28px; align-items: center; padding: 22px 20px; }
   }
 </style>
@@ -323,48 +316,42 @@
     <p class="place"><svg aria-hidden="true"><use href="#i-pin"/></svg>Germany</p>
     <ul class="contact" aria-label="Kontakt" data-i18n-aria="contact">
       <li><a class="cbtn" href="mailto:Techsuli.business@gmail.com?subject=Anfrage" data-mail data-track="mail"><svg aria-hidden="true"><use href="#i-mail"/></svg><span>techsuli.business<wbr>@gmail.com</span></a></li>
-      <li><a class="cbtn" href="#kontakt" data-wa data-track="whatsapp" target="_blank" rel="noopener"><svg class="wa" aria-hidden="true"><use href="#i-whatsapp"/></svg><span data-i18n="wa">WhatsApp für Kooperationen</span></a></li>
+      <li><a class="cbtn" style="--c:#1FAF54" href="#kontakt" data-wa data-track="whatsapp" target="_blank" rel="noopener"><svg class="wa" aria-hidden="true"><use href="#i-whatsapp"/></svg><span data-i18n="wa">WhatsApp für Kooperationen</span></a></li>
     </ul>
   </header>
 
   <section class="app" aria-labelledby="app-titel">
     <div class="head"><h2 id="app-titel" data-i18n="appHead">Meine App</h2><span class="ad" data-i18n="ad">Werbung</span></div>
     <p class="note" data-i18n="appNote">iPhone voll? PlatzDa macht deine Fotos und Videos kleiner, ohne dass du etwas löschen musst.</p>
-    <a class="item" href="https://apps.apple.com/app/apple-store/id6822024283?pt=129603464&amp;ct=webseite&amp;mt=8" target="_blank" rel="noopener" data-track="platzda">
+    <div class="lift" style="--c:#19C37D"><a class="item" href="https://apps.apple.com/app/apple-store/id6822024283?pt=129603464&amp;ct=webseite&amp;mt=8" target="_blank" rel="noopener" data-track="platzda">
       <span class="tile ph"><img src="assets/platzda/icon.webp" width="160" height="160" alt="" decoding="async"></span>
       <span><span class="t">PlatzDa</span><span class="s" data-i18n="appSub">Speicherplatz leeren</span></span>
       <svg class="arrow" aria-hidden="true"><use href="#i-right"/></svg>
-    </a>
-    <ul class="shots" tabindex="0" aria-label="Bilder aus der App" data-i18n-aria="appShots">
-      <li><img src="assets/platzda/de/1.webp" width="1016" height="1640" alt="" data-shot="1" data-i18n-alt="shot1" loading="lazy" decoding="async"></li>
-      <li><img src="assets/platzda/de/2.webp" width="1016" height="1640" alt="" data-shot="2" data-i18n-alt="shot2" loading="lazy" decoding="async"></li>
-      <li><img src="assets/platzda/de/3.webp" width="1016" height="1640" alt="" data-shot="3" data-i18n-alt="shot3" loading="lazy" decoding="async"></li>
-      <li><img src="assets/platzda/de/4.webp" width="1016" height="1640" alt="" data-shot="4" data-i18n-alt="shot4" loading="lazy" decoding="async"></li>
-      <li><img src="assets/platzda/de/5.webp" width="1016" height="1640" alt="" data-shot="5" data-i18n-alt="shot5" loading="lazy" decoding="async"></li>
-    </ul>
+    </a></div>
     <div class="app-info">
       <ul class="facts">
-        <li><svg aria-hidden="true"><use href="#i-check"/></svg><span data-i18n="appF1">Jede Nacht automatisch, während dein iPhone lädt</span></li>
-        <li><svg aria-hidden="true"><use href="#i-check"/></svg><span data-i18n="appF2">Kein Konto, keine Cloud, keine Werbung</span></li>
-        <li><svg aria-hidden="true"><use href="#i-check"/></svg><span data-i18n="appF3">Nichts wird ohne dich gelöscht</span></li>
+        <li><svg aria-hidden="true"><use href="#i-check"/></svg><span data-i18n="appF1">Macht neue Fotos und Videos jede Nacht kleiner, während dein iPhone lädt</span></li>
+        <li><svg aria-hidden="true"><use href="#i-check"/></svg><span data-i18n="appF2">Zeigt dir, was den meisten Platz frisst</span></li>
+        <li><svg aria-hidden="true"><use href="#i-check"/></svg><span data-i18n="appF3">Kein Konto, keine Werbung, deine Fotos bleiben auf deinem iPhone</span></li>
+        <li><svg aria-hidden="true"><use href="#i-check"/></svg><span data-i18n="appF4">Gelöscht wird nur, was du bestätigst</span></li>
       </ul>
-      <a class="get" href="https://apps.apple.com/app/apple-store/id6822024283?pt=129603464&amp;ct=webseite&amp;mt=8" target="_blank" rel="noopener" data-track="platzda" data-i18n="appGet">Im App Store laden</a>
+      <a class="get" href="https://apps.apple.com/app/apple-store/id6822024283?pt=129603464&amp;ct=webseite&amp;mt=8" target="_blank" rel="noopener" data-track="platzda" data-i18n="appGet">PlatzDa im App Store laden</a>
     </div>
   </section>
 
   <nav aria-label="Meine Kanäle" data-i18n-aria="channels">
     <ul class="group socials">
-      <li><a class="item" href="https://www.youtube.com/@TechSulii" target="_blank" rel="noopener" data-track="youtube">
+      <li style="--c:#E62117"><a class="item" href="https://www.youtube.com/@TechSulii" target="_blank" rel="noopener" data-track="youtube">
         <span class="tile yt"><svg aria-hidden="true"><use href="#i-youtube"/></svg></span>
         <span><span class="t">YouTube</span><span class="s">youtube.com/@TechSulii</span></span>
         <svg class="arrow" aria-hidden="true"><use href="#i-right"/></svg>
       </a></li>
-      <li><a class="item" href="https://tiktok.com/@tech.suli" target="_blank" rel="noopener" data-track="tiktok">
+      <li style="--c:#000"><a class="item" href="https://tiktok.com/@tech.suli" target="_blank" rel="noopener" data-track="tiktok">
         <span class="tile tt"><svg aria-hidden="true"><use href="#i-tiktok"/></svg></span>
         <span><span class="t">TikTok</span><span class="s">tiktok.com/@tech.suli</span></span>
         <svg class="arrow" aria-hidden="true"><use href="#i-right"/></svg>
       </a></li>
-      <li><a class="item" href="https://instagram.com/tech.suli" target="_blank" rel="noopener" data-track="instagram">
+      <li class="c-ig"><a class="item" href="https://instagram.com/tech.suli" target="_blank" rel="noopener" data-track="instagram">
         <span class="tile ig"><svg aria-hidden="true"><use href="#i-instagram"/></svg></span>
         <span><span class="t">Instagram</span><span class="s">instagram.com/tech.suli</span></span>
         <svg class="arrow" aria-hidden="true"><use href="#i-right"/></svg>
@@ -379,53 +366,53 @@
     <div class="head"><h2 id="produkte" data-i18n="products">Produkte aus meinen Videos</h2><span class="ad" data-i18n="ad">Werbung</span></div>
     <p class="note" data-i18n="note">Das sind Affiliate-Links. Kaufst du darüber, bekomme ich eine kleine Provision. Für dich ändert sich am Preis nichts.</p>
     <ul class="group products">
-      <li><a class="item" href="https://swappie.com/de/macbook/?utm_source=tech.suli&amp;utm_medium=influencer&amp;utm_campaign=macbook_launch_de&amp;utm_content=instagram" target="_blank" rel="noopener sponsored" data-track="swappie-macbook">
+      <li style="--c:#FFB7ED"><a class="item" href="https://swappie.com/de/macbook/?utm_source=tech.suli&amp;utm_medium=influencer&amp;utm_campaign=macbook_launch_de&amp;utm_content=instagram" target="_blank" rel="noopener sponsored" data-track="swappie-macbook">
         <span class="tile ph"><img src="assets/produkte/swappie.webp" width="160" height="160" alt="" decoding="async"></span>
         <span><span class="t" data-i18n="p_swappie1">Refurbished MacBooks</span><span class="s">Swappie</span></span>
         <svg class="arrow" aria-hidden="true"><use href="#i-right"/></svg>
       </a></li>
-      <li><a class="item" href="https://swappie.com/de/professionell-refurbished-macbooks" target="_blank" rel="noopener sponsored" data-track="swappie-pro">
+      <li style="--c:#FFB7ED"><a class="item" href="https://swappie.com/de/professionell-refurbished-macbooks" target="_blank" rel="noopener sponsored" data-track="swappie-pro">
         <span class="tile ph"><img src="assets/produkte/swappie.webp" width="160" height="160" alt="" decoding="async"></span>
         <span><span class="t" data-i18n="p_swappie2">Professionell aufbereitete MacBooks</span><span class="s">Swappie</span></span>
         <svg class="arrow" aria-hidden="true"><use href="#i-right"/></svg>
       </a></li>
-      <li><a class="item" href="https://app.temu.com/k/euzpedl14fn" target="_blank" rel="noopener sponsored" data-track="temu">
+      <li style="--c:#FB7701"><a class="item" href="https://app.temu.com/k/euzpedl14fn" target="_blank" rel="noopener sponsored" data-track="temu">
         <span class="tile temu" aria-hidden="true">Temu</span>
         <span><span class="t" data-i18n="p_temu">Temu Angebote</span><span class="s">Temu</span></span>
         <svg class="arrow" aria-hidden="true"><use href="#i-right"/></svg>
       </a></li>
-      <li class="has-code"><a class="item" href="https://bit.ly/40eWTc4" target="_blank" rel="noopener sponsored" data-track="maono">
+      <li class="has-code" style="--c:#2D2E2D"><a class="item" href="https://bit.ly/40eWTc4" target="_blank" rel="noopener sponsored" data-track="maono">
         <span class="tile ph"><img src="assets/produkte/maono.webp" width="160" height="160" alt="" decoding="async"></span>
         <span><span class="t" data-i18n="p_maono">MAONO PD200W Mikrofon</span><span class="s">Amazon</span></span>
         <svg class="arrow" aria-hidden="true"><use href="#i-right"/></svg>
       </a>
         <button class="code" type="button" data-code="PD200W10"><span data-i18n="codeLabel">10 % Rabatt mit Code</span> <b>PD200W10</b><span class="code-act" data-i18n="copy">Kopieren</span></button></li>
-      <li><a class="item" href="https://updf.com/de/updf-sales-promotion/?utm_source=tiktok-tech.suli-2601-claire&amp;utm_medium=de&amp;utm_campaign=claire202601&amp;packageKey=overseapromotion" target="_blank" rel="noopener sponsored" data-track="updf">
+      <li style="--c:#5955EC"><a class="item" href="https://updf.com/de/updf-sales-promotion/?utm_source=tiktok-tech.suli-2601-claire&amp;utm_medium=de&amp;utm_campaign=claire202601&amp;packageKey=overseapromotion" target="_blank" rel="noopener sponsored" data-track="updf">
         <span class="tile ph"><img src="assets/produkte/updf.webp" width="160" height="160" alt="" decoding="async"></span>
         <span><span class="t" data-i18n="p_updf">UPDF PDF-Editor mit KI</span><span class="s">UPDF</span></span>
         <svg class="arrow" aria-hidden="true"><use href="#i-right"/></svg>
       </a></li>
-      <li><a class="item" href="https://bit.ly/techie_nomad007DEJOYBUY" target="_blank" rel="noopener sponsored" data-track="yarbo">
+      <li style="--c:#92908C"><a class="item" href="https://bit.ly/techie_nomad007DEJOYBUY" target="_blank" rel="noopener sponsored" data-track="yarbo">
         <span class="tile ph"><img src="assets/produkte/yarbo.webp" width="160" height="160" alt="" decoding="async"></span>
         <span><span class="t" data-i18n="p_snow">Yarbo Schneefräsen-Roboter</span><span class="s">Joybuy</span></span>
         <svg class="arrow" aria-hidden="true"><use href="#i-right"/></svg>
       </a></li>
-      <li><a class="item" href="https://s.whaee.com/ojgVKiz" target="_blank" rel="noopener sponsored" data-track="cuktech-cp12">
+      <li style="--c:#846E62"><a class="item" href="https://s.whaee.com/ojgVKiz" target="_blank" rel="noopener sponsored" data-track="cuktech-cp12">
         <span class="tile ph"><img src="assets/produkte/cuktech-cp12.webp" width="160" height="160" alt="" decoding="async"></span>
         <span><span class="t" data-i18n="p_cp12">CUKTECH CP12 Magnet-Powerbank</span><span class="s">Amazon</span></span>
         <svg class="arrow" aria-hidden="true"><use href="#i-right"/></svg>
       </a></li>
-      <li><a class="item" href="https://s.whaee.com/WyYWq63" target="_blank" rel="noopener sponsored" data-track="cuktech-20">
+      <li style="--c:#2C2C2B"><a class="item" href="https://s.whaee.com/WyYWq63" target="_blank" rel="noopener sponsored" data-track="cuktech-20">
         <span class="tile ph"><img src="assets/produkte/cuktech-20.webp" width="160" height="160" alt="" decoding="async"></span>
         <span><span class="t" data-i18n="p_c20">CUKTECH 20 Powerbank, 140 W</span><span class="s">Amazon</span></span>
         <svg class="arrow" aria-hidden="true"><use href="#i-right"/></svg>
       </a></li>
-      <li><a class="item" href="https://www.amazon.de/dp/B0FQV9N5B5?maas=maas_adg_312D055B4F019CC8E00F7808FC3D951E_afap_abs" target="_blank" rel="noopener sponsored" data-track="icybox">
+      <li style="--c:#3F3F3F"><a class="item" href="https://www.amazon.de/dp/B0FQV9N5B5?maas=maas_adg_312D055B4F019CC8E00F7808FC3D951E_afap_abs" target="_blank" rel="noopener sponsored" data-track="icybox">
         <span class="tile ph"><img src="assets/produkte/icybox.webp" width="160" height="160" alt="" decoding="async"></span>
         <span><span class="t" data-i18n="p_icy">ICY BOX Dockingstation 17-in-1</span><span class="s">Amazon</span></span>
         <svg class="arrow" aria-hidden="true"><use href="#i-right"/></svg>
       </a></li>
-      <li><a class="item" href="https://www.amazon.de/dp/B0FSDQ49RM?maas=maas_adg_2357D6CCCBAA4222D9898C0796827B97_afap_abs" target="_blank" rel="noopener sponsored" data-track="potensic">
+      <li style="--c:#96989A"><a class="item" href="https://www.amazon.de/dp/B0FSDQ49RM?maas=maas_adg_2357D6CCCBAA4222D9898C0796827B97_afap_abs" target="_blank" rel="noopener sponsored" data-track="potensic">
         <span class="tile ph"><img src="assets/produkte/potensic.webp" width="160" height="160" alt="" decoding="async"></span>
         <span><span class="t" data-i18n="p_drone">Potensic Atom 2 Drohne</span><span class="s">Amazon</span></span>
         <svg class="arrow" aria-hidden="true"><use href="#i-right"/></svg>
@@ -467,16 +454,11 @@
         appHead: "Meine App",
         appNote: "iPhone voll? PlatzDa macht deine Fotos und Videos kleiner, ohne dass du etwas löschen musst.",
         appSub: "Speicherplatz leeren",
-        appShots: "Bilder aus der App",
-        appF1: "Jede Nacht automatisch, während dein iPhone lädt",
-        appF2: "Kein Konto, keine Cloud, keine Werbung",
-        appF3: "Nichts wird ohne dich gelöscht",
-        appGet: "Im App Store laden",
-        shot1: "PlatzDa zeigt 99 Prozent vollen Speicher und bietet „Jetzt aufräumen“ an",
-        shot2: "61,5 GB frei machen, ohne etwas zu löschen",
-        shot3: "Ähnliche Fotos nebeneinander, das beste ist markiert",
-        shot4: "Ein Video wird von 5,57 GB auf 766 MB verkleinert",
-        shot5: "Fotos per Wischen aussortieren",
+        appF1: "Macht neue Fotos und Videos jede Nacht kleiner, während dein iPhone lädt",
+        appF2: "Zeigt dir, was den meisten Platz frisst",
+        appF3: "Kein Konto, keine Werbung, deine Fotos bleiben auf deinem iPhone",
+        appF4: "Gelöscht wird nur, was du bestätigst",
+        appGet: "PlatzDa im App Store laden",
         trust: "Das sind meine einzigen echten Accounts.",
         products: "Produkte aus meinen Videos",
         ad: "Werbung",
@@ -515,16 +497,11 @@
         appHead: "My app",
         appNote: "iPhone full? PlatzDa makes your photos and videos smaller, so you don't have to delete anything.",
         appSub: "Free up iPhone storage",
-        appShots: "Screens from the app",
-        appF1: "Automatically every night while your iPhone charges",
-        appF2: "No account, no cloud, no ads",
-        appF3: "Nothing gets deleted without you",
-        appGet: "Get it on the App Store",
-        shot1: "PlatzDa shows storage 99 percent full and offers to clean up",
-        shot2: "Free up 61.5 GB without deleting anything",
-        shot3: "Similar photos side by side with the best one marked",
-        shot4: "A video shrinks from 5.57 GB to 766 MB",
-        shot5: "Sort photos by swiping",
+        appF1: "Shrinks new photos and videos every night while your iPhone charges",
+        appF2: "Shows you what takes up the most space",
+        appF3: "No account, no ads, your photos stay on your iPhone",
+        appF4: "Nothing gets deleted unless you confirm it",
+        appGet: "Get PlatzDa on the App Store",
         trust: "These are my only official accounts.",
         products: "Products from my videos",
         ad: "Ad",
@@ -563,7 +540,6 @@
       document.querySelectorAll("[data-i18n]").forEach(function (el) { el.textContent = t[el.getAttribute("data-i18n")]; });
       document.querySelectorAll("[data-i18n-aria]").forEach(function (el) { el.setAttribute("aria-label", t[el.getAttribute("data-i18n-aria")]); });
       document.querySelectorAll("[data-i18n-alt]").forEach(function (el) { el.setAttribute("alt", t[el.getAttribute("data-i18n-alt")]); });
-      document.querySelectorAll("[data-shot]").forEach(function (img) { img.src = "assets/platzda/" + lang + "/" + img.getAttribute("data-shot") + ".webp"; });
       document.querySelector("[data-mail]").href = "mailto:Techsuli.business@gmail.com?subject=" + encodeURIComponent(t.mailSubject);
       document.querySelectorAll("[data-lang]").forEach(function (b) { b.setAttribute("aria-pressed", b.getAttribute("data-lang") === lang ? "true" : "false"); });
     }
