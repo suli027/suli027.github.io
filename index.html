@@ -190,6 +190,7 @@
   .socials .t, .app .t { font-size: 1.375rem; }
 
   /* Eigene App: Karte wie die Kanäle, darunter Store-Bilder und Knopf in PlatzDa-Grün */
+  .app { margin-top: 32px; }
   .app .item { height: auto; }
   .app .s { white-space: normal; }
   .app-body {
@@ -210,8 +211,6 @@
   .facts { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; font-weight: 500; }
   .facts li { display: flex; gap: 8px; align-items: flex-start; }
   .facts svg { width: 20px; height: 20px; margin-top: 2px; color: var(--ok); flex: none; }
-  .app-buy { display: grid; gap: 10px; }
-  .deal { margin: 0; font-weight: 600; color: var(--ok); }
   .get {
     display: flex; align-items: center; justify-content: center;
     min-height: 54px; padding: 8px 16px;
@@ -220,7 +219,6 @@
     transition: background-color .2s var(--ease-out);
   }
   .get:hover { background: #16B071; }
-  .fine { margin: 0; color: var(--ink-2); font-size: .875rem; line-height: 1.4; }
 
   .rule { height: 2px; background: var(--line); border: 0; margin: 40px 0 28px; }
 
@@ -321,29 +319,6 @@
     </ul>
   </header>
 
-  <nav aria-label="Meine Kanäle" data-i18n-aria="channels">
-    <ul class="group socials">
-      <li><a class="item" href="https://www.youtube.com/@TechSulii" target="_blank" rel="noopener" data-track="youtube">
-        <span class="tile yt"><svg aria-hidden="true"><use href="#i-youtube"/></svg></span>
-        <span><span class="t">YouTube</span><span class="s">youtube.com/@TechSulii</span></span>
-        <svg class="arrow" aria-hidden="true"><use href="#i-right"/></svg>
-      </a></li>
-      <li><a class="item" href="https://tiktok.com/@tech.suli" target="_blank" rel="noopener" data-track="tiktok">
-        <span class="tile tt"><svg aria-hidden="true"><use href="#i-tiktok"/></svg></span>
-        <span><span class="t">TikTok</span><span class="s">tiktok.com/@tech.suli</span></span>
-        <svg class="arrow" aria-hidden="true"><use href="#i-right"/></svg>
-      </a></li>
-      <li><a class="item" href="https://instagram.com/tech.suli" target="_blank" rel="noopener" data-track="instagram">
-        <span class="tile ig"><svg aria-hidden="true"><use href="#i-instagram"/></svg></span>
-        <span><span class="t">Instagram</span><span class="s">instagram.com/tech.suli</span></span>
-        <svg class="arrow" aria-hidden="true"><use href="#i-right"/></svg>
-      </a></li>
-    </ul>
-    <p class="trust"><svg aria-hidden="true"><use href="#i-shield"/></svg><span data-i18n="trust">Das sind meine einzigen echten Accounts.</span></p>
-  </nav>
-
-  <hr class="rule">
-
   <section class="app" aria-labelledby="app-titel">
     <div class="head"><h2 id="app-titel" data-i18n="appHead">Meine App</h2><span class="ad" data-i18n="ad">Werbung</span></div>
     <p class="note" data-i18n="appNote">iPhone voll? PlatzDa macht deine Fotos und Videos kleiner, ohne dass du etwas löschen musst.</p>
@@ -366,14 +341,31 @@
           <li><svg aria-hidden="true"><use href="#i-check"/></svg><span data-i18n="appF2">Kein Konto, keine Cloud, keine Werbung</span></li>
           <li><svg aria-hidden="true"><use href="#i-check"/></svg><span data-i18n="appF3">Nichts wird ohne dich gelöscht</span></li>
         </ul>
-        <div class="app-buy">
-          <p class="deal" hidden>Startpreis bis 30.11.: einmal kaufen für 19,99 €. Ab 1.12. kostet es 39,99 €.</p>
-          <a class="get" href="https://apps.apple.com/app/apple-store/id6822024283?pt=129603464&amp;ct=webseite&amp;mt=8" target="_blank" rel="noopener" data-track="platzda" data-i18n="appGet">Gratis im App Store laden</a>
-          <p class="fine" data-i18n="appFine">15 Löschungen und ein verkleinertes Video sind gratis. Die Vollversion gibt es als Abo oder Einmalkauf.</p>
-        </div>
+        <a class="get" href="https://apps.apple.com/app/apple-store/id6822024283?pt=129603464&amp;ct=webseite&amp;mt=8" target="_blank" rel="noopener" data-track="platzda" data-i18n="appGet">Im App Store laden</a>
       </div>
     </div>
   </section>
+
+  <nav aria-label="Meine Kanäle" data-i18n-aria="channels">
+    <ul class="group socials">
+      <li><a class="item" href="https://www.youtube.com/@TechSulii" target="_blank" rel="noopener" data-track="youtube">
+        <span class="tile yt"><svg aria-hidden="true"><use href="#i-youtube"/></svg></span>
+        <span><span class="t">YouTube</span><span class="s">youtube.com/@TechSulii</span></span>
+        <svg class="arrow" aria-hidden="true"><use href="#i-right"/></svg>
+      </a></li>
+      <li><a class="item" href="https://tiktok.com/@tech.suli" target="_blank" rel="noopener" data-track="tiktok">
+        <span class="tile tt"><svg aria-hidden="true"><use href="#i-tiktok"/></svg></span>
+        <span><span class="t">TikTok</span><span class="s">tiktok.com/@tech.suli</span></span>
+        <svg class="arrow" aria-hidden="true"><use href="#i-right"/></svg>
+      </a></li>
+      <li><a class="item" href="https://instagram.com/tech.suli" target="_blank" rel="noopener" data-track="instagram">
+        <span class="tile ig"><svg aria-hidden="true"><use href="#i-instagram"/></svg></span>
+        <span><span class="t">Instagram</span><span class="s">instagram.com/tech.suli</span></span>
+        <svg class="arrow" aria-hidden="true"><use href="#i-right"/></svg>
+      </a></li>
+    </ul>
+    <p class="trust"><svg aria-hidden="true"><use href="#i-shield"/></svg><span data-i18n="trust">Das sind meine einzigen echten Accounts.</span></p>
+  </nav>
 
   <hr class="rule">
 
@@ -473,8 +465,7 @@
         appF1: "Jede Nacht automatisch, während dein iPhone lädt",
         appF2: "Kein Konto, keine Cloud, keine Werbung",
         appF3: "Nichts wird ohne dich gelöscht",
-        appGet: "Gratis im App Store laden",
-        appFine: "15 Löschungen und ein verkleinertes Video sind gratis. Die Vollversion gibt es als Abo oder Einmalkauf.",
+        appGet: "Im App Store laden",
         shot1: "PlatzDa zeigt 99 Prozent vollen Speicher und bietet „Jetzt aufräumen“ an",
         shot2: "61,5 GB frei machen, ohne etwas zu löschen",
         shot3: "Ähnliche Fotos nebeneinander, das beste ist markiert",
@@ -522,8 +513,7 @@
         appF1: "Automatically every night while your iPhone charges",
         appF2: "No account, no cloud, no ads",
         appF3: "Nothing gets deleted without you",
-        appGet: "Get it free on the App Store",
-        appFine: "15 deletions and one shrunk video are free. The full version is a subscription or a one-time purchase.",
+        appGet: "Get it on the App Store",
         shot1: "PlatzDa shows storage 99 percent full and offers to clean up",
         shot2: "Free up 61.5 GB without deleting anything",
         shot3: "Similar photos side by side with the best one marked",
@@ -568,8 +558,6 @@
       document.querySelectorAll("[data-i18n-aria]").forEach(function (el) { el.setAttribute("aria-label", t[el.getAttribute("data-i18n-aria")]); });
       document.querySelectorAll("[data-i18n-alt]").forEach(function (el) { el.setAttribute("alt", t[el.getAttribute("data-i18n-alt")]); });
       document.querySelectorAll("[data-shot]").forEach(function (img) { img.src = "assets/platzda/" + lang + "/" + img.getAttribute("data-shot") + ".webp"; });
-      // Startpreis nur auf Deutsch (Euro) und nur bis einschließlich 30.11.2026, danach verschwindet die Zeile von selbst
-      document.querySelector(".deal").hidden = !(lang === "de" && Date.now() < Date.parse("2026-12-01T00:00:00+01:00"));
       document.querySelector("[data-mail]").href = "mailto:Techsuli.business@gmail.com?subject=" + encodeURIComponent(t.mailSubject);
       document.querySelectorAll("[data-lang]").forEach(function (b) { b.setAttribute("aria-pressed", b.getAttribute("data-lang") === lang ? "true" : "false"); });
     }
