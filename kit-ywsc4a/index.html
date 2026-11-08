@@ -26,6 +26,7 @@
     --ink-2: #5F616A;
     --soft: #E6E6EA;
     --ok: #12703F;
+    --mark: #FFE24A;
     --blue: #2F6FEB;
     --font: "Clash Grotesk", "Onest", system-ui, sans-serif;
     --body: "Onest", system-ui, sans-serif;
@@ -147,6 +148,14 @@
   .pack .t { font-size: 1.125rem; }
   .pack .price { font-family: var(--font); font-size: 1.375rem; font-weight: 700; white-space: nowrap; font-variant-numeric: tabular-nums; }
   .pack .s { grid-column: 1 / -1; margin: 0; }
+  /* Preis-Bereich hebt sich ab: weißer Rahmen mit hartem blauem Schatten, Preise mit gelbem Textmarker */
+  .prices { margin-top: 52px; padding: 24px 16px 28px; background: var(--card); box-shadow: inset 0 0 0 3px var(--ink), 8px 8px 0 var(--blue); }
+  .prices h2 { font-size: 1.75rem; }
+  .prices .pack, .prices .extras { background: var(--page); box-shadow: none; }
+  .prices .pack.tip { background: var(--card); box-shadow: inset 0 0 0 2px var(--ink), 5px 5px 0 var(--ink); }
+  .prices .price, .prices .extras b { padding: 0 6px; background: linear-gradient(transparent 12%, var(--mark) 12%, var(--mark) 92%, transparent 92%); }
+  .prices .pack.tip .price { font-size: 1.75rem; }
+  .prices .note { color: var(--ink); font-weight: 500; }
   .tag { display: inline-block; margin-left: 8px; padding: 2px 7px; background: var(--ink); color: #fff; font-family: var(--body); font-size: .75rem; font-weight: 700; vertical-align: 2px; }
   .note { margin: 12px 0 0; color: var(--ink-2); font-size: .875rem; }
   .extras { list-style: none; margin: 0; padding: 4px 16px; background: var(--card); }
@@ -297,7 +306,7 @@
     <ul class="chips partners"><li>Samsung</li><li>Xiaomi</li><li>DJI</li><li>TORRAS</li><li>ESR</li><li>Swappie</li><li>PLAUD AI</li><li>CUKTECH</li><li>YARBO</li><li>Joybuy</li><li>ICY BOX</li><li>TEMU</li><li>Kortix AI</li></ul>
   </section>
 
-  <section aria-labelledby="h-pakete">
+  <section class="prices" aria-labelledby="h-pakete">
     <h2 id="h-pakete">Pakete und Preise</h2>
     <ul class="packs">
 <li class="pack tip"><span class="t">TikTok + Instagram Reel<span class="tag">Beliebt</span></span><span class="price">999 €</span><p class="s">Ein Video auf beiden Plattformen, jeweils passend angepasst</p></li>
