@@ -121,8 +121,8 @@
   .bars { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
   .bar { display: grid; grid-template-columns: 7.5em minmax(0, 1fr) 4em; align-items: center; gap: 10px; font-size: .9375rem; }
   .bar span:last-child { text-align: right; font-weight: 600; font-variant-numeric: tabular-nums; }
-  .track { height: 10px; background: var(--soft); }
-  .fill { height: 100%; width: var(--w); background: var(--ink); transform-origin: left; }
+  .track { display: block; height: 10px; background: var(--soft); }
+  .fill { display: block; height: 100%; width: var(--w); background: var(--ink); transform-origin: left; }
   .split { display: flex; height: 14px; margin-top: 4px; }
   .split i { display: block; height: 100%; }
   .split .m { background: var(--ink); }
@@ -268,11 +268,11 @@
     <h2 id="h-ziel">Zielgruppe <small>TikTok-Zuschauer der letzten 28 Tage</small></h2>
     <div class="aud">
       <div class="box"><h3>Alter</h3><ul class="bars">
-<li class="bar"><span>18–24</span><span class="track"><span class="fill" style="--w:45.2%"></span></span><span>22,6 %</span></li>
-<li class="bar"><span>25–34</span><span class="track"><span class="fill" style="--w:81.6%"></span></span><span>40,8 %</span></li>
-<li class="bar"><span>35–44</span><span class="track"><span class="fill" style="--w:41.2%"></span></span><span>20,6 %</span></li>
-<li class="bar"><span>45–54</span><span class="track"><span class="fill" style="--w:22.4%"></span></span><span>11,2 %</span></li>
-<li class="bar"><span>55+</span><span class="track"><span class="fill" style="--w:9.6%"></span></span><span>4,8 %</span></li>
+<li class="bar"><span>18–24</span><span class="track"><span class="fill" style="--w:22.6%"></span></span><span>22,6 %</span></li>
+<li class="bar"><span>25–34</span><span class="track"><span class="fill" style="--w:40.8%"></span></span><span>40,8 %</span></li>
+<li class="bar"><span>35–44</span><span class="track"><span class="fill" style="--w:20.6%"></span></span><span>20,6 %</span></li>
+<li class="bar"><span>45–54</span><span class="track"><span class="fill" style="--w:11.2%"></span></span><span>11,2 %</span></li>
+<li class="bar"><span>55+</span><span class="track"><span class="fill" style="--w:4.8%"></span></span><span>4,8 %</span></li>
       </ul></div>
       <div class="box"><h3>Länder</h3><ul class="bars">
 <li class="bar"><span>Deutschland</span><span class="track"><span class="fill" style="--w:80.5%"></span></span><span>80,5 %</span></li>
@@ -294,23 +294,23 @@
 
   <section aria-labelledby="h-partner">
     <h2 id="h-partner">Bisherige Partner</h2>
-    <ul class="chips partners"><li>Xiaomi</li><li>ESR</li><li>TORRAS</li></ul>
+    <ul class="chips partners"><li>Samsung</li><li>Xiaomi</li><li>DJI</li><li>TORRAS</li><li>ESR</li><li>Swappie</li><li>PLAUD AI</li><li>CUKTECH</li><li>YARBO</li><li>Joybuy</li><li>ICY BOX</li><li>TEMU</li><li>Kortix AI</li></ul>
   </section>
 
   <section aria-labelledby="h-pakete">
-    <h2 id="h-pakete">Formate</h2>
+    <h2 id="h-pakete">Pakete und Preise</h2>
     <ul class="packs">
-<li class="pack tip"><span class="t">TikTok + Instagram Reel<span class="tag">Beliebt</span></span><p class="s">Ein Video auf beiden Plattformen, jeweils passend angepasst</p></li>
-<li class="pack"><span class="t">Nur TikTok</span><p class="s">Ein TikTok-Video im Hochformat</p></li>
-<li class="pack"><span class="t">Nur Instagram Reel</span><p class="s">Ein Reel auf @tech.suli</p></li>
-<li class="pack"><span class="t">Drei Plattformen</span><p class="s">TikTok, Reel und YouTube Short</p></li>
-<li class="pack"><span class="t">Mit YouTube-Video</span><p class="s">Alle drei plus eigenes YouTube-Video (rund 3 bis 5 Minuten)</p></li>
+<li class="pack tip"><span class="t">TikTok + Instagram Reel<span class="tag">Beliebt</span></span><span class="price">999 €</span><p class="s">Ein Video auf beiden Plattformen, jeweils passend angepasst</p></li>
+<li class="pack"><span class="t">Nur TikTok</span><span class="price">799 €</span><p class="s">Ein TikTok-Video im Hochformat</p></li>
+<li class="pack"><span class="t">Nur Instagram Reel</span><span class="price">399 €</span><p class="s">Ein Reel auf @tech.suli</p></li>
+<li class="pack"><span class="t">Drei Plattformen</span><span class="price">1.150 €</span><p class="s">TikTok, Reel und YouTube Short</p></li>
+<li class="pack"><span class="t">Mit YouTube-Video</span><span class="price">1.399 €</span><p class="s">Alle drei plus eigenes YouTube-Video (rund 3 bis 5 Minuten)</p></li>
     </ul>
-    <p class="note">Preise schicke ich dir passend zu deinem Projekt per Mail. Bei mehreren Videos oder einer Serie gibt es Spielraum.</p>
+    <p class="note">Alle Preise sind Endpreise, ohne Umsatzsteuer (Kleinunternehmer nach § 19 UStG). Bei mehreren Videos oder einer Serie gibt es Spielraum.</p>
     <div class="sub"><h3>Extras</h3><ul class="extras">
-<li><span>Spark-Ads-Code für 30 Tage</span></li>
-<li><span>2–3 Instagram-Storys mit Link</span></li>
-<li><span>Nutzungsrechte für eure Anzeigen, 12 Monate</span></li>
+<li><span>Spark-Ads-Code für 30 Tage</span><b>+ 250 €</b></li>
+<li><span>2–3 Instagram-Storys mit Link</span><b>+ 150 €</b></li>
+<li><span>Nutzungsrechte für eure Anzeigen, 12 Monate</span><b>+ 300 €</b></li>
     </ul></div>
     <div class="sub"><h3>Ablauf</h3><ul class="steps">
 <li><svg aria-hidden="true"><use href="#i-check"/></svg><span>Erster Entwurf 5 bis 7 Werktage, nachdem das Produkt da ist</span></li>
