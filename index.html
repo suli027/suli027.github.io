@@ -276,6 +276,28 @@
     .socials li:first-child { grid-column: 1 / -1; }
     .products { align-items: start; }
   }
+
+  /* Top-Deal: große hervorgehobene Karte über der Produktliste */
+  .feat { position: relative; margin: 6px 0 34px; }
+  .feat::before { content: ""; position: absolute; left: 8px; right: -8px; top: 8px; bottom: -8px; background: #E8261C; }
+  .feat a { position: relative; z-index: 1; display: grid; grid-template-columns: 1fr; gap: 14px; padding: 22px 20px 20px; background: var(--card); border: 2px solid var(--ink); text-decoration: none; color: var(--ink); transition: transform .25s var(--ease-out); }
+  .feat a:hover { transform: translate(-3px, -3px); }
+  .feat a:active { transform: translate(4px, 4px); }
+  .feat .badge { justify-self: start; display: inline-flex; align-items: center; gap: 6px; padding: 6px 12px; background: #E8261C; color: #fff; font-weight: 700; font-size: .9375rem; letter-spacing: .04em; text-transform: uppercase; }
+  .feat .pic { background: #F5F5F7; display: grid; place-items: center; }
+  .feat .pic img { width: min(100%, 320px); height: auto; aspect-ratio: 1; object-fit: contain; }
+  .feat .name { margin: 0; font-size: clamp(1.75rem, 8vw, 2.5rem); font-weight: 700; line-height: 1.05; }
+  .feat .price { display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; margin: 0; }
+  .feat .now { font-size: clamp(2.25rem, 11vw, 3.25rem); font-weight: 700; color: #E8261C; line-height: 1; }
+  .feat .was { font-size: 1.25rem; color: var(--ink-2); text-decoration: line-through; }
+  .feat .off { font-weight: 700; font-size: 1rem; padding: 2px 8px; border: 2px solid #E8261C; color: #E8261C; }
+  .feat .sub { margin: 0; color: var(--ink-2); font-weight: 500; }
+  .feat .cta { display: flex; align-items: center; justify-content: center; gap: 10px; min-height: 56px; padding: 10px 18px; background: var(--ink); color: #fff; font-weight: 700; font-size: 1.125rem; letter-spacing: .01em; }
+  .feat a:hover .cta { background: #E8261C; }
+  @media (min-width: 700px) {
+    .feat a { grid-template-columns: 300px 1fr; align-items: center; column-gap: 28px; padding: 26px 28px; }
+    .feat .pic { grid-row: 1 / span 6; }
+  }
 </style>
 </head>
 <body>
@@ -366,6 +388,14 @@
   <section aria-labelledby="produkte">
     <div class="head"><h2 id="produkte" data-i18n="products">Produkte aus meinen Videos</h2><span class="ad" data-i18n="ad">Werbung</span></div>
     <p class="note" data-i18n="note">Das sind Affiliate-Links. Kaufst du darüber, bekomme ich eine kleine Provision. Für dich ändert sich am Preis nichts.</p>
+    <div class="feat"><a href="https://link.amazon/B0bFhvALE" target="_blank" rel="noopener sponsored" data-track="airpods-pro-3">
+      <span class="pic"><img src="assets/produkte/airpods-pro-3.webp?v=2" width="720" height="720" alt="Apple AirPods Pro 3" decoding="async"></span>
+      <span class="badge" data-i18n="f_badge">🔥 Black-Friday-Deal aus meinem Video</span>
+      <p class="name">AirPods Pro 3</p>
+      <p class="price"><span class="now">179 €</span><span class="was">249 €</span><span class="off">−28 %</span></p>
+      <p class="sub" data-i18n="f_sub">Beste Noise-Cancelling-In-Ears, die ich selbst seit einem Jahr nutze. Preis kann sich jederzeit ändern.</p>
+      <span class="cta"><span data-i18n="f_cta">Zum Deal auf Amazon</span><svg class="arrow" aria-hidden="true" width="22" height="22"><use href="#i-right"/></svg></span>
+    </a></div>
     <ul class="group products">
       <li style="--c:#B9BABD"><a class="item" href="https://link.amazon/B06A8P4TL" target="_blank" rel="noopener sponsored" data-track="sbs-100w">
         <span class="tile ph"><img src="assets/produkte/sbs-100w.webp" width="160" height="160" alt="" decoding="async"></span>
@@ -474,6 +504,9 @@
         products: "Produkte aus meinen Videos",
         ad: "Werbung",
         note: "Das sind Affiliate-Links. Kaufst du darüber, bekomme ich eine kleine Provision. Für dich ändert sich am Preis nichts.",
+        f_badge: "🔥 Black-Friday-Deal aus meinem Video",
+        f_sub: "Beste Noise-Cancelling-In-Ears, die ich selbst seit einem Jahr nutze. Preis kann sich jederzeit ändern.",
+        f_cta: "Zum Deal auf Amazon",
         p_sbs: "SBS Reise-Ladegerät 100 W",
         p_eco: "EcoFlow Powerbank 45 W mit Kabel",
         p_swappie1: "Refurbished MacBooks",
@@ -519,6 +552,9 @@
         products: "Products from my videos",
         ad: "Ad",
         note: "These are affiliate links. If you buy through them, I earn a small commission at no extra cost to you.",
+        f_badge: "🔥 Black Friday deal from my video",
+        f_sub: "The best noise-cancelling earbuds, I have used them myself for a year. Price may change at any time.",
+        f_cta: "Get the deal on Amazon",
         p_sbs: "SBS 100 W travel charger",
         p_eco: "EcoFlow 45 W power bank with built-in cable",
         p_swappie1: "Refurbished MacBooks",
